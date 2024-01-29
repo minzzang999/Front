@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>수학과 숫자관련 내장객체(Math, Number)</title>
+<script>
+	// 아래에 사용된 메서드 외에 삼각함수, 로그관련 함수를 제공한다.
+	console.log("-10의 절댓값 : " + Math.abs(-10));
+	console.log("-10, 3, 10, 5, 7에서 최댓값 : " + Math.max(-10, 3, 10, 5, 7));
+	console.log("0 ~ 1 사이의 난수 : " + Math.random());
+	console.log("123.456의 첫째자리 반올림 : " + Math.round(123.456));
+	console.log("10의 3승 : " + Math.pow(10, 3));
+	console.log("2의 제곱근 : " + Math.sqrt(2));
+	console.log("원주율 : " + Math.PI);
+	console.log("123.987 소수 첫째자리 버림 : " + Math.floor(123.987));
+	console.log("123.123 소수 첫째자리 올림 : " + Math.ceil(123.123));
+	
+	// Number 객체의 toFixed()를 이용해 소수 셋째자리에서 반올림하여 둘째자리까지 표시
+	console.log("123.123 소수 둘째자리까지 표시 : " + (123.123).toFixed(2));
+	console.log("123.789 소수 둘째자리까지 표시 : " + (123.789).toFixed(2));
+	
+	console.log("1 ~ 45 사이의 난수 : " + Math.floor((Math.random() * 45) + 1));
+</script>
+</head>
+<body>
+</body>
+</html>

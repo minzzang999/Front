@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML 문서의 스타일 다루기</title>
+<script>
+	/* HTML 문서의 스타일 다루기
+	 * 요소 노드의 style 프로퍼티를 사용해 스타일을 적용하면 인라인(inline)
+	 * 방식의 스타일이 적용되어 스타일 우선 순위가 높아지는 문제가 있다.
+	 * 또한 같은 스타일을 여러 태그에 적용하려면 아래와 같이 비슷한 코드를 
+	 * 여러 번 중복해서 작성해야 하는 문제가 발생한다. 중복 코드가 많아지면
+	 * 오류가 발생될 확률이 높아지고 유지 보수 비용도 많이 올라간다. 그래서
+	 * 부득이한 경우가 아니라면 자바스크립트에서 직접 스타일을 적용하는 것
+	 * 보다 class 선택자로 미리 스타일 규칙을 만들어 놓고 자바스크립트에서
+	 * HTML 태그에 class 속성을 추가했다가 삭제하는 방식이 권장되는 방식이다.
+	 **/
+
+	// HTML 문서의 모든 구성 요소가 메모리에 준비되면
+	window.onload = function() {
+
+		// id='plan'인 요소를 선택하고 Element 객체로 읽어온다.
+		const plan = document.querySelector("#plan");				
+
+	 /* 자바스크립트에서 HTML의 스타일을 다루려면 요소 노드의 style 프로퍼티를
+		* 이용해 스타일 속성에 접근할 수 있다. CSS에서 사용하는 스타일 속성이 
+		* 다음과 같이 여러 단어로 되어 있는 경우 자바스크립트의 style 프로퍼티로
+		* 접근할 때는 낙타 표기법(Camel case)을 사용해야 한다.
+		* 
+		* background-color -> 요소노드.style.backgroundColor
+		**/
+		/*
+		plan.children[0].style.backgroundColor = "#FFAAAA";
+		plan.children[0].style.textDecoration = "line-through";
+		plan.children[3].style.backgroundColor = "#FFAAAA";
+		plan.children[3].style.textDecoration = "line-through";		
+		*/
+
+		/* HTML에서 class 속성은 요소 노드에서 className 프로퍼티로 접근한다.		 
+		 * 다음과 같이 className 프로퍼터에 값을 지정하면 기존에 설정되어 있는
+		 * class 속성을 덮어 쓰기 때문에 기존 class가 사라지므로 기존에 설정된
+		 * 스타일 등이 적용되지 않는 문제가 발생한다. 아래와 같이 className에
+		 * 클래스 이름을 지정하면 기존의 plan-list 클래스는 삭제된다.
+		 **/
+		//plan.children[0].className = "done";
+
+		/* 요소 노드의 classList 프로퍼티를 이용하면 기존 클래스 그대로 새로운
+		 * 클래스를 추가하고, 삭제 할 수 있으며 기존 클래스를 수정할 수도 있다.
+		 * classList 프로퍼터는 클래스를 추가(add), 삭제(remove), 치환(replace)
+		 * 토글(toggle) 할 수 이는 메서드를 지원한다.
+		 **/
+		//plan.children[0].classList.add("done");
+
+		// 여러 개의 인수를 지정해 여러 클래스를 지정할 수 있다.
+		//plan.children[0].classList.add("test1", "test2");
+
+		// 기존 클래스를 새로운 클래스로 치환할 수 있다.
+		//plan.children[0].classList.replace("done", "studying");
+
+		// 기존에 존재하는 클래스를 삭제할 수 있으며 동시에 여러 개를 삭제할 수 있다.
+		//plan.children[0].classList.remove("test1", "test2");
+
+		/* toggle() 메서드는 해당 요소에 지정한 클래스가 없으면 추가하고 있으면
+		 * 삭제하는 기능을 제공한다. 이 메서드의 두 번째 인수로 true를 지정하면
+		 * 추가하는 기능만 제공하고 false를 지정하면 삭제하는 기능만 제공하게 된다.
+		 **/
+		plan.children[0].classList.toggle("done");
+		plan.children[3].classList.toggle("done");
+	}	
+</script>
+<style>
+	.content {
+		width: 400px;
+	}
+	li.done {
+		text-decoration: line-through;
+		background-color: #EAEAEA;
+	}
+	li.done::after {
+		content :  " - 1차 완료";
+		color: red;
+	}
+	li.studying {		
+		background-color: #FFEAEA;
+	}
+	li.studying::after {
+		content :  " - 진행중";
+		color: blue;
+	}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div class="header">
+			<h1>DOM Tree</h1>
+		</div>		
+		<div class="content">
+			<!-- 앞으로 스터디 할 목록 -->
+			<h2>프로그래밍 스터디 계획</h2>
+			<ul id="plan">
+				<li class="plan-list">JavaScript 함수</li>
+				<li class="plan-list">JavaScript DOM</li>
+				<li class="plan-list">JavaScript Event</li>
+				<li class="plan-list done">jQuery 함수 선택자</li>					
+				<li class="plan-list">jQuery Effect</li>
+			</ul>
+		</div>
+		<div class="content">
+			<!-- 완료된 스터디 목록 -->
+			<h2>프로그래밍 스터디 완료</h2>
+			<ul id="done">
+				<li class="done-list">HTML 기본 태그</li>
+				<li class="done-list">HTML5 시멘틱 태그</li>
+				<li class="done-list">CSS3 선택자</li>
+				<li class="done-list">CSS3 박스모델</li>
+				<li class="done-list">JavaScript 제어문</li>
+			</ul>
+		</div>
+	</div>		
+</body>
+</html>

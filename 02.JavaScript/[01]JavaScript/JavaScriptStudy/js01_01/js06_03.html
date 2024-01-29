@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    class Member {
+
+        constructor(name, id, address) {
+            this.name = name;
+            this.id = id;	
+            this.address = address;
+        }
+
+        toString() {
+            return '<p>'
+                    + '이 름 : ' + this.name + '<br/>'
+                    + '아이디 : ' + this.id + '<br/>'				
+                    + '주 소 : ' + this.address + '<br/>'
+                + '</p>';
+        }
+    }    
+    const Student = class {
+		constructor(name, grade) {			
+			this.name = name;
+			this.grade = grade;
+		}
+		toString() {
+			return '<p>'
+					+ '이름 : ' + this.name + '<br/>'
+					+ '학년 : ' + this.grade + '<br/>' 
+				+ '</p>';
+		}
+	}
+
+    const member = new Member("홍길동", "midas", "서울시 관악구 봉천동");
+    const s1 = new Student("임꺽정", 3);
+    const s2 = new Student("김정민", 4);
+
+    document.write(member.name + "<br>");
+    document.write(s1["grade"]);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

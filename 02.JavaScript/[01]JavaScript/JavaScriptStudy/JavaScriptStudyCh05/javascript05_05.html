@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>가변인자 함수 정의하기</title>
+<script>
+	function multiplyFunc(num1, num2) {
+		
+		/* 매개변수의 개수를 정확히 맞추기 위해 arguments 객체를 사용하였다.
+		* 함수 안에서 매개변수 정보를 관리하는 arguments 객체를 사용할 수 있다.	 
+		**/
+		if(arguments.length != 2) {
+			alert('인수의 수가 다릅니다. 인수는 2개만 입력 하세요');
+			return; 
+		}
+		alert(num1);
+		// 인수 값이 undefined 이거나 숫자가 아니면 기본 값을 지정함 
+		if(num1 == 'undefined' || isNaN(num1)) { num1 = 1; }
+		if(num2 == 'undefined' || isNaN(num2)) { num2 = 1; }
+		
+		console.log("multiplyFunc(num1, num2) : " + num1 * num2);
+	}
+
+	/* 함수를 선언할 때 함수가 몇 개의 인수를 받게 될 지 모르는 경우 아래와 같이
+	* 전개구문을 이용해 매개변수를 만들면 인수의 개수와 상관없이 함수를 정의할
+	* 수 있으며 함수 안에서 배열처럼 매개변수에 접근해 처리할 수 있다. 
+	* 물론 arguments 객체를 통해서 함수로 전달된 매개변수에 접근할 수도 있다.
+	**/  
+	function multiplyParams(...nums) {
+		console.log(nums);
+		console.log(arguments);
+		let result = 0;	
+		for(let num of nums) {
+			if(isNaN(num)) { 
+				continue; 
+			}
+			result += num;
+		}
+		console.log("multiplyParams() : " + result);
+	}
+</script>
+</head>
+<body>
+	<div>
+		<!-- 
+			자바스크립트는 함수 정의와 다르게 인수의 개수를 다르게 호출할 수 있지만
+			함수의 기능을 제대로 사용하기 위해서는 인수를 정확하게 지정해야 한다. 
+		-->
+		<input type="button" value="multiplyFunc(1, 2) 호출" 
+			onclick="multiplyFunc(10, 30, 20)" />
+		<input type="button" value="multiplyParams() 호출"
+			onclick="multiplyParams(10, 20, 'NaN', 30, 40)" />
+	</div>
+</body>
+</html>

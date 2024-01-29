@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>요소 노드를 추가, 수정, 삭제하기</title>
+<script>	
+	/* 요소 노드를 추가, 수정, 삭제하기
+	 * createElement(), cloneNode(), prepend(), append(), before(), 
+	 * after(), remove() 함수를 활용해 요소를 추가, 수정 삭제하기 
+	 **/
+
+	// HTML 문서의 모든 구성 요소가 메모리에 준비되면
+	window.onload = function() {
+		
+		// id='plan'인 요소를 선택하고 Element 객체로 읽어온다.
+		const plan = document.querySelector("#plan");
+
+		// 새로운 li 태그를 생성하고 내용을 추가한 후 plan의 마지막 자식으로 추가
+		const li1 = document.createElement("li");
+		li1.textContent = "오라클 SQL 스터디 준비";
+		plan.append(li1);
+		
+		// li1을 자식을 포함해 복제하고 내용을 수정한 후 plan의 첫 번째 자식으로 추가
+		const li2 = li1.cloneNode(true);
+		li2.textContent = "JavaScript 제어문 복습";
+		plan.prepend(li2);
+
+		/* li2를 자식을 포함해 복제하고 내용을 수정한 후 plan의 index 1번째
+		 * 자식 요소를 읽어와서 그 요소의 바로 앞에 새로 복제한 요소를 추가
+		 **/
+		 const li3 = li2.cloneNode(true);
+		li3.textContent = "함수 만들기 집중 공략";
+		const planChild1 = plan.children[1];
+		planChild1.before(li3);
+		//planChild1.after(li3);
+		
+		// plan의 첫 번째 자식을 선택하고 삭제하기
+		plan.firstElementChild.remove();
+		
+		// plan의 첫 번째 자식을 가져와 id='done'인 요소의 첫 번째 자식으로 이동
+		const done = document.querySelector("#done");
+		done.prepend(plan.firstElementChild);
+		//done.append(plan.lastElementChild);
+		
+		// plan의 첫 번째 자식을 가져와 done의 index 1번째 자식의 앞과 뒤로 이동
+		done.children[1].before(plan.firstElementChild);
+		done.children[1].after(plan.firstElementChild);
+
+		
+	}
+</script>
+</head>
+<body>
+	<div id="container">
+		<div class="header">
+			<h1>DOM Tree</h1>
+		</div>		
+		<div class="content">
+			<!-- 앞으로 스터디 할 목록 -->
+			<h2>프로그래밍 스터디 계획</h2>
+			<ul id="plan">
+				<li class="plan-list">JavaScript 함수</li>
+				<li class="plan-list">JavaScript DOM</li>
+				<li class="plan-list">JavaScript Event</li>
+				<li class="plan-list">jQuery 함수 선택자</li>					
+				<li class="plan-list">jQuery Effect</li>
+			</ul>
+		</div>
+		<div class="content">
+			<!-- 완료된 스터디 목록 -->
+			<h2>프로그래밍 스터디 완료</h2>
+			<ul id="done">
+				<li class="done-list">HTML 기본 태그</li>
+				<li class="done-list">HTML5 시멘틱 태그</li>
+				<li class="done-list">CSS3 선택자</li>
+				<li class="done-list">CSS3 박스모델</li>
+				<li class="done-list">JavaScript 제어문</li>
+			</ul>
+		</div>
+	</div>		
+</body>
+</html>

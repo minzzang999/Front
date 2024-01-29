@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM에서 다양한 방법으로 문서 객체 선택하기</title>
+<script>
+	// id, children, TagName, ClassName, CSS Selector를 이용한 요소 선택
+	// HTML 문서의 모든 구성 요소가 메모리에 준비되면
+	window.onload = function() {
+		
+		// DOM에서 id가 plan인 요소를 찾아 HTMLElement 객체로 읽어온다.
+		const plan = document.getElementById("plan");				
+		
+		// 다음은 plan요소의 자식 요소들을 HTMLCollection 객체로 읽어온다.		
+		
+		
+		// DOM에서 모든 li 요소를 찾아 HTMLCollection 객체로 읽어한다. 
+		const liTags = document.getElementsByTagName('li');
+		console.log(liTags);
+
+		/* HTMLCollection 객체는 유사 배열(Array-Like Object)로 배열과 유사한
+		 * 자료구조를 가진 객체이다. 배열이 아니라서 배열이 제공하는 메서드를
+		 * 사용할 순 없지만 숫자 형식의 인덱싱(indexing)이 가능하고 length
+		 * 프로퍼티를 사용할 수 있다. 
+     **/
+		console.log(liTags[3], " - ",  liTags.length);
+		for(li of liTags) {
+			console.log(li);
+		}
+
+		// DOM에서 class가 done-list인 요소를 찾아 HTMLCollection 객체로 읽어온다. 
+		const doneList = document.getElementsByClassName('done-list');
+		console.log(doneList);
+
+		// DOM에서 CSS 선택자로 class가 plan-list인 첫 번째 요소를 Element 객체로 읽어온다.
+		const content = document.querySelector('.plan-list');
+		console.log(content);
+
+		// DOM에서 CSS 선택자로 class가 plan-list인 모든 요소를 NodeList 객체로 읽어온다.
+		const contentAll = document.querySelectorAll('.plan-list');
+		console.log(contentAll);
+
+		// NodeList 객체도 유사 배열이지만 배열처럼 forEach 함수를 사용할 수 있다.
+		contentAll.forEach((value, i) => {
+			console.log(i, value);
+		});
+	}
+</script>
+</head>
+<body>
+	<div id="container">
+		<div class="header">
+			<h1>DOM Tree</h1>
+		</div>		
+		<div class="content">
+			<!-- 앞으로 스터디 할 목록 -->
+			<h2>프로그래밍 스터디 계획</h2>
+			<ul id="plan">
+				<li class="plan-list">JavaScript 함수</li>
+				<li class="plan-list">JavaScript DOM</li>
+				<li class="plan-list">JavaScript Event</li>
+				<li class="plan-list">jQuery 함수 선택자</li>					
+				<li class="plan-list">jQuery Effect</li>
+			</ul>
+		</div>
+		<div class="content">
+			<!-- 완료된 스터디 목록 -->
+			<h2>프로그래밍 스터디 완료</h2>
+			<ul id="done">
+				<li class="done-list">HTML 기본 태그</li>
+				<li class="done-list">HTML5 시멘틱 태그</li>
+				<li class="done-list">CSS3 선택자</li>
+				<li class="done-list">CSS3 박스모델</li>
+				<li class="done-list">JavaScript 제어문</li>
+			</ul>
+		</div>
+	</div>		
+</body>
+</html>

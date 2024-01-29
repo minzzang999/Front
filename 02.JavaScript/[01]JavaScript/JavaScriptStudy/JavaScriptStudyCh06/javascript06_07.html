@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>날짜 내장객체(Date)</title>
+<script>	
+	// 현재 날짜와 시간 정보를 저장하는 Date 객체 생성
+	let date = new Date();
+	
+	// 지정한 날짜(2021년 12월 25일)와 시간 정보를 저장하는 Date 객체 생성
+	let date1 = new Date(2021, 11, 25);
+	
+	console.log("date : " + date);
+	console.log("date1 : " + date1);	
+	
+	let week = "";
+	
+	/* Date 객체는 날짜와 시간정보를 다루를 객체로 날짜와 시간 정보를 가져오는 
+	 * getter 메서드와 날짜와 시간 정보를 설정할 수 있는 setter 메서드가 있다.
+	 *
+	 * getDay()는 요일 정보를 일(0) ~ 토(6)까지 반환한다.
+	 **/
+	switch(date.getDay()) {
+		case 0:
+			week = "일요일";
+			break;
+		case 1:
+			week = "월요일";
+			break;
+		case 2:
+			week = "화요일";
+			break;
+		case 3:
+			week = "수요일";
+			break;
+		case 4:
+			week = "목요일";
+			break;
+		case 5:
+			week = "금요일";
+			break;
+		case 6:
+			week = "토요일";
+			break;
+	}	
+	console.log(date.getFullYear() + "년 " + (date.getMonth() + 1) + "월 "
+			+ date.getDate() + "일(" + week+ ")");
+</script>
+</head>
+<body>
+</body>
+</html>

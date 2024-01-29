@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>screen 객체를 이용해 모니터 정보 다루기</title>
+<script>
+	/* width : 화면의 전체 너비를 반환
+	 * height: 화면의 전체 높이를 반환
+	 * availWidth : 작업 표시줄을 제외한 화면의 너비를 반환
+	 * availHeight : 작업 표시줄을 제외한 화면의 높이를 반환
+	 * colorDepth : 이미지를 표시하기 위한 색상 팔레트의 컬러 bit를 반환
+	 **/
+	document.write("전체 화면 너비 : " + screen.width + 
+			", 높이 : " + screen.height + "<br/>");
+	document.write("작업 표시줄 제외 화면 너비 : " + screen.availWidth 
+			+ ", 높이 : " + screen.availHeight + "<br/>");
+	document.write("컬러 해상도 : " + screen.colorDepth + "bit");	
+</script>
+</head>
+<body>
+</body>
+</html>

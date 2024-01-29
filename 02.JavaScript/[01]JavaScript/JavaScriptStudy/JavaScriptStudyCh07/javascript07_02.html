@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>새 창 띄우기 - Main Window</title>
+<script>
+	let subwin;
+	
+	function subOpen() {
+		/* subwin에 자식 창의 참조가 저장된다.
+		 * 부모 창에서 subwin 변수를 이용해 자식 창에 접근할 수 있다.
+		 **/ 
+		subwin = window.open('javascript07_0201.html', 'sub', 
+					'width=600, height=300, left=300, top=300');
+	}	
+	
+	function subClose() {
+		// 아래와 같이 subwin 변수를 이용해 자식 창을 닫을 수 있다.
+		subwin.close();		
+	}	
+	
+	function parentClose() {		
+		/* 처음에 실행되었을 때 아래 명령을 수행하면 크롬과 Edge 모두 정상적으로
+		 * 브라우저 창이 잘 닫히는데 브라우저를 실행한 후에 주소를 입력하여 현재 
+		 * 페이지에 접속하게 되면 창이 닫히지 않는다. 예전에는 close() 함수가 잘
+		 * 동작했으나 현재에는 보안상의 이유로 링크로 열린 창이거나 window.open()
+		 * 함수로 열린 창이 아니라면 window.close() 함수가 제대로 동작하지 않는다.
+		 **/	
+		self.close();		
+		// window.close();
+		// this.close(); 		 
+	}
+</script>
+</head>
+<body>
+<body>
+	<form name="parentForm">
+		주소 : <input type="text" name="address" readonly>
+	</form><br>
+	<input type="button" value="서브 윈도우 열기" onclick="subOpen()" />
+	<input type="button" value="서브 윈도우 닫기" onclick="subClose()" />
+	<input type="button" value="부모 윈도우 닫기" onclick="parentClose()" />
+</body>
+</body>
+</html>

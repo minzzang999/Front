@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Member(name, id){
+            this.name = name;
+            this.id = id;
+        }
+        const member = new Member('이순신', 'midastop');
+
+        document.write("<h2>객체의 타입 체크</h2>");
+        document.write(`typeof member : ${typeof member}<br>`);
+        document.write(`member instanceof Member : ${member instanceof Member}<br/>`);
+        document.write(`member instanceof String : ${member instanceof String}<br/>`);
+        document.write(`member instanceof Object : ${member instanceof Object}<br/>`);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

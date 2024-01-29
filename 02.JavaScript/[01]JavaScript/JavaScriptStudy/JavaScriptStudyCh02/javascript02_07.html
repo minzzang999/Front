@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>형 변환과 typeof 연산자</title>
+<script>
+let num10 = 10;
+let strNum10 = '10'
+let boolTrue = true;
+
+/* 문자열 데이터와 다른 형 데이터의 + 연산은 문자열 연결 연산을 한다.
+ * 문자열을 + 연산하면 문자열 연결 연산이 되는데 이때 문자열과 + 연산을 하는
+ * 다른 형의 데이터는 자동으로 문자열로 변환되어 문자열 연결 연산을 한다.
+ * 다음과 같이 문자열 + 숫자, 문자열 + 불린 데이터를 연산을 하면 문자열이
+ * 우선되어 숫자나 불린 데이터는 자동으로 문자열 데이터로 변환 된 후 문자열
+ * 연결 연산이 이루어진다.
+ **/
+document.write("strNum10 + num10 = " + (strNum10 + num10) + "<br>");
+document.write("strNum10 + boolTrue = " + (strNum10 + boolTrue) + "<br>");
+
+/* 만약 문자열이나 불린 데이터를 + 연산 이외의 사칙연산을 시도하면 숫자가 
+ * 우선되어 문자열이나 불린 데이터를 숫자로 변환 후에 사칙연산이 이루어진다.
+ * 이렇게 자동으로 데이터 형이 변환되는 것을 묵시적(implicit) 형 변환이라고 한다.
+ **/
+document.write("strNum10 - num10 = " + (strNum10 - num10) + "<br>");
+document.write("strNum10 - boolTrue = " + (strNum10 - boolTrue) + "<br>");
+
+/* Number() 함수는 아래와 같이 괄호 안에 지정한 데이터를 숫자로 변환해 준다.
+ * 이렇게 데이터 형을 강제로 변환하는 것을 명시적(Explicit) 형 변환이라고 한다. 
+ **/
+document.write(`Number(true) : ${Number(true)}, Number("3") : ${Number("3")}<br>`);
+document.write(`Number("") : ${Number("")}, Number('034.56') : ${Number('034.56')}<br>`);
+
+// window 객체의 parseInt(), parseFloat() 함수는 문자열을 숫자로 변환해 주는 함수이다.
+document.write(`parseInt("") : ${parseInt("")}, parseInt("034.56") : ${parseInt("034.56")}<br>`);
+document.write(`parseFloat("") : ${parseFloat("")}, parseFloat("034.56") : ${parseFloat("034.56")}<br>`);
+document.write(`parseInt("12A") : ${parseInt("12A")}, parseFloat("123.4A5") : ${parseFloat("123.4A5")}<br>`);
+
+/* toString() 함수는 null과 undefined 자료형을 제외한 나머지 모든 자료형에서
+ * 사용할 수 있는 함수로 괄호에 지정한 데이터를 문자열로 변환해 주는 함수이다.
+ * String() 함수는 괄호에 지정한 데이터를 문자열로 변환해 주는 함수이다.
+ **/
+document.write(`String(20) + num10.toString() : ${String(20) + num10.toString()}<br>`);
+document.write(`String(null) + String(undefined) : ${String(null) + String(undefined)}<br>`);
+
+// Boolean() 함수는 괄호에 지정한 데이터를 불린 데이터로 변환해 주는 함수이다.
+document.write(`Boolean(1) : ${Boolean(1)}, Boolean(0) : ${Boolean(0)}<br>`);
+document.write(`Boolean("a") : ${Boolean("a")}, Boolean("") : ${Boolean("")}<br>`);
+
+function func() { }
+let arr = []
+let obj = {}
+
+/* typeof 연산자는 지정한 변수나 리터럴의 데이터 형의 이름을 소문자로 반환한다.
+ * 숫자형은 number, 논리형은 boolean, 문자열은 string, 함수형은 function,
+ * 객체 자료형은 object가 반환된다.
+ **/	
+document.write(`typeof num10 : ${typeof num10}, typeof true : ${typeof true}<br>`);
+document.write(`typeof "a" : ${typeof "a"}, typeof func : ${typeof func}<br>`);
+document.write(`typeof arr : ${typeof arr}, typeof obj : ${typeof obj}<br>`);
+document.write(`typeof null : ${typeof null}, typeof undefined : ${typeof undefined}<br>`);
+</script>
+</head>
+<body>
+</body>
+</html>

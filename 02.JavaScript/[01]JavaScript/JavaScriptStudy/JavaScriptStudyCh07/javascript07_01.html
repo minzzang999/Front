@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window 객체의 속성</title>
+<script>
+	function showProperty() {
+		let result = document.getElementById("result");
+		let str = "<h2>window 객체의 속성</h2>";
+		str += "윈도우 이름 : " + window.name + "<br/>"
+		str += "윈도우가 닫혔는지 여부 : " + window.closed + "<br/>"
+		str += "상태 표시줄의 문자열 : " + window.status + "<br/>"
+		str += "윈도우 내용 영역의 폭과 너비 : " 
+				+ window.innerWidth + "px, " + window.innerHeight + "px<br/>";
+		str += "툴바와 스크롤바를 포함한 윈도우의 폭과 너비 : " 
+				+ window.outerWidth + "px, " + window.outerHeight + "px<br/>";
+		str += "화면에 대한 문서의 좌표 : " 
+				+ window.screenLeft + "px, " + window.screenTop + "px<br/>";
+		str += "화면에 대한 윈도우 좌표 : " 
+			+ window.screenX + "px, " + window.screenY + "px<br/>";
+		str += "스크롤된 좌표 : " 
+			+ window.pageXOffset + "px, " + window.pageYOffset + "px<br/>";	
+		str += "현재 윈도우를 연 윈도우 : " + window.opener + "<br/>";
+		str += "현재 윈도우의 부모 : " + window.parent + "<br/>";
+		str += "현재 윈도우 객체 : " + window.self + "<br/>";
+		str += "최상위 브라우저  : " + window.top + "<br/>";
+								
+		result.innerHTML = str;		
+	}
+	
+</script>
+</head>
+<body>
+<input type="button" onclick="showProperty();" 
+		value="window 객체의 속성 보기" /><br/>		
+<div id="result"></div>
+</body>
+</html>

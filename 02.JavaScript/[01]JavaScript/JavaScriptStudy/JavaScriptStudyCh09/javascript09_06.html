@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>키보드 이벤트</title>
+<style type="text/css">	
+	.input_bg {
+		background-color: #FFEAEA;		
+	}
+	#result {
+		width: 680px;
+		height: 300px;
+		border: 1px solid #9999FF;
+		overflow: auto;
+	}
+</style>
+<script>		
+	window.addEventListener('DOMContentLoaded', function() {
+		console.log("DOM 로드 완료");
+
+		const result = document.querySelector("#result");
+		const data = document.querySelector("#data");
+		let input = "";
+
+		data.addEventListener("focusin", e => {
+			e.target.classList.toggle("input_bg");			
+		});		
+		data.addEventListener("focusout", e => {
+			e.target.classList.remove("input_bg");
+		});
+		data.addEventListener("keydown", e => {
+			result.innerHTML += `keydown - key : ${e.key}, code : ${e.code},
+			altKey : ${e.altKey}, shiftKey : ${e.shiftKey}, ctrlKey : ${e.ctrlKey}<br>`;			
+		});
+		data.addEventListener("keypress", e => {
+			result.innerHTML += `keypress - key : ${e.key}, code : ${e.code},
+			altKey : ${e.altKey}, shiftKey : ${e.shiftKey}, ctrlKey : ${e.ctrlKey}<br>`;			
+		});		
+	});
+</script>
+</head>
+<body>
+	<input type="text" name="data" id="data">
+	<input type="button" value="확인">
+	<div id="result"></div>
+</body>
+</html>

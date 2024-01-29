@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Member{
+            constructor(name, id, address){
+                this.name = name;
+                this.id = id;
+                this.address = address;
+            }
+            toString(){
+                return '<p>'
+                    + '이름 :' + this.name + '<br/>'
+                    + '아이디 :' + this.name + '<br/>'
+                    + '주소 :' + this.address + '<br/>'
+                    +'</p>';
+            }
+        }
+
+        const Student = class {
+            constructor(name, grade){
+                this.name = name;
+                this.grade = grade;
+            }
+            toString() {
+                return '<p>'
+                    + '이름 :' + this.name + '<br/>' 
+                    + '학년 :' + this.grade + '<br/>'
+                + '</p>';
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

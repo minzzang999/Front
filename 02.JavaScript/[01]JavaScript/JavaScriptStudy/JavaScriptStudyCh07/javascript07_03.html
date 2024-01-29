@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window 객체의 메소드</title>
+<style>
+	div {
+		width: 600px;
+	}
+	.div1 {
+		height: 300px;		
+		background-color: red;
+		border: 1px solid black;
+	}
+	.div2 {
+		height: 300px;
+		background: green;
+		border: 1px solid black;
+	}
+	.div3 {
+		height: 300px;
+		background: blue;
+	}
+	#scrollBtn {
+		position: relative;
+	}
+</style>
+<script>	
+	function winScrollBy(xnum, ynum, elem) {		
+		// 문서 상단에서 윈도우 스크롤(상대위치) 버튼까지의 거리를 구한다.
+		let btnTop = elem.style.top;
+		
+		/* 윈도우 스크롤(상대위치) 버튼의 Y축 위치는 단위를 포함하여(예 : 100px)
+		 * 반환되기 때문에 String 객체의 substring() 메소드와 indexOf() 메소드를
+		 * 사용해 단위를 제외한 숫자 형태의 데이터만 추출하고 매개변수로 넘어온
+		 * ynum과 덧셈하여 다시 px 단위를 연결한 데이터를 만들었다.
+		 **/ 
+		elem.style.top = (Number(btnTop.substring(0, btnTop.indexOf("p")))
+				+ Number(ynum)) + "px";
+		
+		// 문서를 현재 위치에서 xnum, ynum 만큼 스크롤 시킨다.
+		scrollBy(xnum, ynum);
+	}
+</script>
+</head>
+<body>
+	<!-- window.print() 메서드로 운영체제의 인쇄 대화상자를 띄운다. -->
+	<input type="button" onclick="window.print();" value="프린트하기" /><br/>
+	<!-- window.scrollTo() 메서드로 문서를 x=0px, y=200px 위치로 스크롤 시킨다. -->
+	<input type="button" onclick="window.scrollTo(0, 200);" 
+		value="윈도우 스크롤(절대위치)" /><br/>
+	<input type="button" onclick="winScrollBy(0, 100, this);"
+		value="윈도우 스크롤(상대위치)" id="scrollBtn"/><br/>
+	<div class="div1">&nbsp;</div>
+	<div class="div2"></div>
+	<div class="div3"></div>
+	<div class="div1"></div>
+	<div class="div2"></div>
+	<div class="div3"></div>
+</body>
+</html>

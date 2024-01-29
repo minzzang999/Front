@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>요소 노드의 프로퍼티</title>
+<script>	
+	/* 요소 노드의 프로퍼티를 이용해 내용을 읽어오거나 변경하기
+	 * innerHTML, outerHTML, textContent, innterText 프로퍼티는
+	 * 요소의 내용을 읽어오거나 설정할 수 있는 프로퍼티들 이다.   
+	 **/
+
+	// HTML 문서의 모든 구성 요소가 메모리에 준비되면
+	window.onload = function() {
+		
+		// class='content'인 요소 중에서 첫 번째 요소를 Element 객체로 읽어온다.
+		let content = document.querySelector(".content");		
+
+		/* innerHTML 프로퍼티는 요소 안에 있는 모든 HTML을 문자열로 읽어오거나 요소
+		 * 안의 내용을 다른 HTML로 변경할 수 있는 프로퍼티이다. 이 프로퍼티는 요소
+		 * 안의 내용을 읽어올 때 공백과 들여쓰기를 포함해서 있는 그대로 읽어온다.
+		 **/
+		console.log(content.innerHTML);
+		content.innerHTML = `<h2>과일 리스트</h2>
+											<ul><li>수박</li><li>망고</li></ul>`;
+		content = document.querySelector(".content");
+		console.log(content.innerHTML);
+
+		/* outerHTML 프로퍼티는 innerHTML과는 다르게 선택된 해당 요소를 포함해서
+		 * 전체 HTML을 문자열로 읽어오거나 해당 요소를 다른 HTML로 변경할 수 있다.		  
+		 **/
+		console.log(content.outerHTML);
+		content.outerHTML = `<div class='test'>
+													<h2>새로운 스터디 계획</h2>
+													<ul id='plan'>
+														<li>오라클 SQL 활용 </li>
+														<li>자바 기초 문법</li>
+													</ul>
+												</div>`;
+		
+		// innerHTML 프로퍼티를 이용해 기존의 내용 뒤에 새로운 내용도 추가할 수 있다.
+		document.querySelector("#plan").innerHTML += "<li>자바 제어문 활용</li>";
+		
+		// 문서에서 id='done'인 요소를 선택
+		let planList = document.querySelector("#done");
+
+		/* innerText와 textContent 프로퍼티는 요소 안의 내용 중에서 HTML 코드를 제외한
+		 * 텍스트를 문자열로 읽어오거나 설정할 수 있다. 요소의 내용을 설정할 때 HTML 
+		 * 코드가 포함되어도 문서에 적용되지 않고 일반 텍스트로 취급된다. 
+		 **/
+		console.log(planList.innerText);		
+		console.log(planList.textContent);
+		
+		// 태그를 포함해 요소의 내용을 변경했지만 태그 또한 일반 텍스트로 취급된다.
+		planList.children[1].innerText = "<p>HTML5 Form 태그</p>";
+		planList.children[3].textContent = "<p>CSS3 레이아웃을 위한 속성</p>";		
+	}
+</script>
+</head>
+<body>
+	<div id="container">
+		<div class="header">
+			<h1>DOM Tree</h1>
+		</div>		
+		<div class="content">
+			<!-- 앞으로 스터디 할 목록 -->
+			<h2>프로그래밍 스터디 계획</h2>
+			<ul id="plan">
+				<li class="plan-list">JavaScript 함수</li>
+				<li class="plan-list">JavaScript DOM</li>
+				<li class="plan-list">JavaScript Event</li>
+				<li class="plan-list">jQuery 함수 선택자</li>					
+				<li class="plan-list">jQuery Effect</li>
+			</ul>
+		</div>
+		<div class="content">
+			<!-- 완료된 스터디 목록 -->
+			<h2>프로그래밍 스터디 완료</h2>
+			<ul id="done">
+				<li class="done-list">HTML 기본 태그</li>
+				<li class="done-list">HTML5 시멘틱 태그</li>
+				<li class="done-list">CSS3 선택자</li>
+				<li class="done-list">CSS3 박스모델</li>
+				<li class="done-list">JavaScript 제어문</li>
+			</ul>
+		</div>
+	</div>		
+</body>
+</html>

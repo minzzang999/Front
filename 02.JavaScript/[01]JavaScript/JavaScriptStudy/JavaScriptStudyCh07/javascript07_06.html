@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>location 객체를 이용해 페이지 주소(URL) 다루기</title>
+<script>	
+	/* location 객체는 웹 브라우저의 주소 표시줄과 관련된 속성과 메서드를 제공하는 객체이다.
+	 * 웹 브라우저의 현재 주소 즉 URL에 대한 정보와 새로 고침(reload) 메서드를 제공한다.
+	 **/
+	function locationMove() {		
+		/* location 객체의 href 속성으로 브라우저의 URL을 읽어오거나 설정할 수 있다.
+		 * 아래와 같이 href 속성을 설정하면 브라우저의 주소 표시줄(URL)이 변경되기 
+		 * 때문에 지정한 URL로 이동하게 된다.
+		 **/
+		location.href="http://www.naver.com";
+		//console.log(location.href);
+	}
+	
+	function locationReload() {		
+		// reload() 메서드는 현재 페이지를 다시 로드(새로 고침, F5) 한다.
+		location.reload()
+		alert('현재 페이지를 새로 고침 했습니다.');		
+	}
+	
+	// html 문서의 구성 요소가 모두 로딩 되면 이벤트를 처리할 이벤트 핸들러 등록 
+	window.onload = function() {
+		
+		// 현재 URL를 읽어온다.
+		let href = location.href;
+		
+		// 현재 URL에서 프로토콜, 호스트네임, 포트 번호를 읽어온다.
+		let origin = location.origin;
+		
+		// 현재 URL에서 경로 이름을 읽어온다.
+		let pathname = location.pathname;
+		
+		// 현재 URL에서 프로토콜 정보를 읽어온다.
+		let protocol = location.protocol;
+		
+		// 현재 URL에서 호스트 이름과 포트 번호를 읽어온다.
+		let host = location.host;
+		
+		// 현재 URL에서 호스트 이름을 읽어온다.
+		let hostname = location.hostname;
+		
+		// 현재 URL에서 포트 번호를 읽어온다.
+		let port = location.port;
+		
+		// 현재 URL에서 쿼리 스트링을 읽어온다.
+		let search = location.search;
+		
+		let result = "<h2>location 객체 정보</h2>";
+		result += "<ul>";
+		result += "		<li>href : " + href + "</li>";
+		result += "		<li>origin : " + origin + "</li>";
+		result += "		<li>pathname " + pathname + "</li>";
+		result += "		<li>protocol : " + protocol + "</li>";	
+		result += "		<li>host : " + host + "</li>";
+		result += "		<li>hostname : " + hostname + "</li>";
+		result += "		<li>port  :" + port + "</li>";
+		result += "		<li>search : " + search + "</li>";
+		result += "		<li>" + (search.length == 0 ? "쿼리 스트링 없음" : "") + "</li>";
+		result += "</ul>";
+		
+		/* 문서에서 id가 locationStatus인 문서객체를 선택하고		
+		 * 이 요소의 내용을 result의 내용으로 변경한다. 
+		 **/
+		let div = document.querySelector("#locationStatus");
+		div.innerHTML = result;
+	}		
+</script>
+</head>
+<body>
+	<div id="locationStatus"></div>	
+	<input type="button" value="네이버 가기" onclick="locationMove();" />
+	<input type="button" value="reload" onclick="locationReload();"/>	
+</body>
+</html>

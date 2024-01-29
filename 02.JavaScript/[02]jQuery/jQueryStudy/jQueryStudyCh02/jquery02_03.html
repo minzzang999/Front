@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>filter()와 find() 메서드를 이용한 DOM 탐색</title>
+<style type="text/css">
+</style>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js" ></script>
+<script>		
+	$(function() {
+
+		$('#container')
+			.css('position', 'relative')							
+			.css('width', '600px');
+		
+		$('#container > .imgs')
+			.css('float', 'left')
+			.css('width', '160px')
+			.css('height', '150px')
+			.css('margin', '10px 10px')
+			.css('text-align', 'center');
+		
+		$('#result')
+			.css('width', '600px')
+			.css('height', '250px')
+			.css('margin', '10px 10px')							
+			.css('border', '1px solid red');
+	});
+	
+	function filterSearch(value) {
+		
+		// 지정한 요소의 style 속성을 지운다.
+		$('#container img').removeAttr('style');
+		
+		/* $(selector).filter(selector) :요소 중에서 필터 조건에 맞는 요소만 선택
+		 * $(selector).filter(function(){}) : 필터 함수에서 true를 반환하는 요소만 선택
+		 *
+		 * end() 메소드는 문서 객체 선택을 한 단계 이전으로 돌린다.
+		 */
+		if(value == 'selector') {
+			
+			/* id가 container 요소의 자손 요소 중 img 요소들을 선택하고 그중에서
+			 * src 속성의 값이 js 문자열을 포함하는 요소만 선택한 후 border를 설정한다.
+			 * 그리고 선택을 한 단계 앞으로 돌려 다시 id가 container 요소의 자손
+			 * 요소 중 img 요소들을 선택하고 그 중에서 src 속성의 값이 web 문자열을
+			 * 포함하는 요소만 선택해 border를 설정한다.
+			 **/
+			$('#container img').filter('[src*=js]')
+				.css('border', '3px dotted blue')
+				.end().filter('[src*=web]')
+				.css('border', '3px dotted red');
+			
+		} else if(value == 'function'){
+			$('#container img')
+				.filter(function(index) {					
+					return $(this)
+						.attr('src') == 'images/modern_html5.jpg'
+						|| index > 5;					
+				}).css('border', '3px solid red');
+		}
+	}
+	
+	function findSearch(value) {
+		
+		// 선택한 요소를 지운다.
+		$('#result > ol').remove();
+		$('#result > div').remove();
+		
+		// $(selector).find(selector) : 요소 중 조건에 맞는 자손을 전체 선택
+		if(value == 'img') {
+			$('#result').append('<ol id="imgList"></ol>');
+			$('#container').find(value).each(function(index, value) {				
+				$('#imgList')
+					.append('<li>' + $(this).attr('src') + '</li>');		
+			});
+			
+		} else if(value == 'clone'){
+			
+			/* clone() 메소드는 선택한 요소를 복제하여 반환한다.
+			 * removeClass() 메소드는 선택한 요소의 class 속성을 지운다.
+			 **/
+			let $clone = $('#container > .imgs:nth-child(3n+1)').clone()
+				.removeClass('imgs');
+			
+			/* end() 메소드는 문서 객체 선택을 한 단계 이전으로 돌린다.
+			 * add() 메소드는 문서 객체를 추가로 더 선택한다.
+			 * 
+			 * 아래는 id가 result에 $clone 요소를 추가하고 end() 메소드를 사용해
+			 * 현재 선택된 id가 result인 요소의 선택을 한 단계 앞으로 되돌리는데 여기서는
+			 * 현재 선택된 요소의 이전이 없으므로 add() 메서드에 지정한 요소만 선택되어
+			 * id가 result의 자손인 img 요소를 선택하여 border를 설정하고 있다.
+			 **/
+			$('#result').append($clone)
+				.end().add('#result img').css('border', 'none');		
+			
+			// body 요소의 자손 요소 중에서 img 요소를 모두 선택한다.
+			let $childs = $('body').find($('img'));
+			$('<div><h3>문서의 이미지 수는 ' + $childs.length 
+				+ '개 입니다.</h3></div>').appendTo($('#result'))
+				.css('clear', 'both').css('text-align', 'center'); 
+		}
+	}
+</script>
+</head>
+<body>
+	<div id="container">
+		<div class="imgs">
+			<img src="images/js_coreguide.jpg" /><br/>
+			<label>js_coreguide.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/js_corepattern.jpg" /><br/>
+			<label>js_corepattern.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/web_publishing.jpg" /><br/>
+			<label>web_publishing.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/web_recipe.jpg" /><br/>
+			<label>web_recipe.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/modern_html5.jpg" /><br/>
+			<label>modern_html5.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/modern_javascript.jpg" /><br/>
+			<label>modern_javascript.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/make_html5.jpg" /><br/>
+			<label>make_html5.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/javascript_guide.jpg" /><br/>
+			<label>javascript_guide.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/js_webapplication.jpg" /><br/>
+			<label>js_webapplication.jpg</label>
+		</div>
+		<div id="buttons">
+			<button onclick="filterSearch('selector')">
+				filter()로 탐색</button>
+			<button onclick="filterSearch('function')">
+				filter(function(){})로 탐색</button>
+			<button onclick="findSearch('img')">
+				find().each()로 탐색</button>
+			<button onclick="findSearch('clone')">
+				find()로 탐색</button>			
+		</div>
+	</div>	
+	<div id="result"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

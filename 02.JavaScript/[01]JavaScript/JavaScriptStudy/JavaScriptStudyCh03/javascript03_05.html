@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>switch 조건문</title>
+<script>
+	function choose() {				
+		
+		// 문서에서 id가 result인 문서 객체를 선택한다. 
+		let result = document.getElementById('result');
+		
+		// 문서에서 이름이 inputForm 하위의 score에 입력된 값을 읽어온다.
+		let inputNum = document.inputForm.score.value;		
+		
+		// 입력된 학점을 대문자로 변환해 조건을 체크한다.		 
+		switch(inputNum.toUpperCase()) {
+		
+		/* switch 문의 () 안의 값이 A 이면 아래의 case 'A' 부분이 실행되고 switch
+		 * 문이 종료된다. 이렇게 switch 문의 () 안의 값에 따라서 해당하는 case 문 안의
+		 * 코드가 실행되고 해당하는 부분이 없을 때는 default 문의 코드가 실행된다.
+		 * default가 필요하지 않으면 생략할 수 있다.
+		 **/
+		case 'A' :
+			// id가 result인 문서 객체의 하위에 html 태그를 포함해 데이터를 추가한다. 
+			result.innerHTML = '90점 이상<br/>';			
+			break;
+		case 'B' :
+			result.innerHTML = '80 ~ 89점<br/>';			
+			break;
+		case 'C' :
+			result.innerHTML = '70 ~ 79점<br/>';			
+			break;
+		case 'D' :
+			result.innerHTML = '60 ~ 69점<br/>';			
+			break;
+		default : 
+			result.innerHTML = '60점 미만<br/>';			
+		}
+		inputForm.score.value = '';
+	}
+</script>
+</head>
+<body>
+	<form name="inputForm">
+		학점을 입력해 주세요(예 : A, B, C)<br/>
+		<input type="text" name="score" id="score"/>
+		<input type="button" value="체크하기" onclick="choose()"/>
+	</form> 
+	<div id="result"></div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>history 객체를 이용해 방문한 사이트 정보 다루기</title>
+<script>
+	function goBack() {
+		
+		/* history 객체의 go() 메서드의 인수에 음수를 지정하면 이전 방문
+		 * 사이트로 이동하고 양수를 지정하면 다음 방문 사이트로 이동한다. 
+		 * history 객체의 length 속성은 방문 사이트 목록에 저장된 개수를 반환한다. 
+		 */  
+		history.go(-(history.length - 1));
+		
+		/* 문서에서 id가 cnt인 문서객체를 선택하고 이 요소의 내용에
+		 * 현재 history 객체에 저장된 사이트 목록의 개수를 출력한다.
+		 **/
+		var cnt = document.querySelector("#historyCnt");
+		cnt.innerHTML = history.length;
+	}
+	
+	function anchorMove(elem, page) {		
+		elem.href = page;
+		elem.target = "subFrame"
+		
+		/* 문서에서 id가 cnt인 문서객체를 선택하고 이 요소의 내용에
+		 * 현재 history 객체에 저장된 사이트 목록의 개수를 출력한다.
+		 **/
+		var cnt = document.querySelector("#historyCnt");
+		cnt.innerHTML = history.length;
+		
+		// 다음과 같이 iframe의 내용을 변경할 수 있다.
+		//document.getElementById("content").contentWindow
+		//	.document.body.innerHTML = "main : " + history.length;
+	}
+</script>
+</head>
+<body>	
+	<a href="#" onclick="anchorMove(this, 'javascript07_01.html');">1페이지</a><br />
+	<a href="#" onclick="anchorMove(this, 'javascript07_02.html');">2페이지</a><br />
+	<a href="#" onclick="anchorMove(this, 'javascript07_03.html');">3페이지</a><br />
+	<!--
+		iframe 요소는 별도의 웹 문서를 이미지나 테이블과 같은 개체처럼 현재 문서의 
+		특정 위치에 삽입할 수 있는 기능을 제공한다. 아래와 같이 a 요소에 링크를 설정하고
+		target 속성에 iframe 요소의 name 속성에 지정한 이름을 지정하면 된다. 
+		iframe 요소를 아이프레임(iframe) 또는 인라인 프레임(Inline Frame)이라고 부른다.
+		
+		<a href="iframe에 출력할 html문서" target="subFrame">이동하기</a>
+	-->		
+	<iframe name="subFrame" src="about:blank" width="400" height="200" 
+		id="content"></iframe><br/>
+	<button type="button" onclick="goBack();">처음으로</button>&nbsp;&nbsp;&nbsp;
+	<!-- 
+		history 객체의 back() 메서드는 방문 사이트 목록에서 현재 페이지의 
+		바로 이전 페이지로 이동하며 forward() 메서드는 현재 페이지의 바로
+		이후에 방문한 페이지로 이동한다.   
+	-->
+	<button type="button" onclick="history.back();">이전으로</button>&nbsp;&nbsp;&nbsp;
+	<button type="button" onclick="history.forward();">다음으로</button><br/>
+	<div id="historyCnt"></div>
+</body>
+</html>

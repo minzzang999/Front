@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const N = 120;
+        //약수 구하기 - 120의 약수 구하기
+        //1,2,3
+        //120의 약수는 1, 2, 3 ... 120이며 20개 입니다.
+        let cnt = 0;
+        let divisor = "";
+        for(let i = 1; i <= 120; i++){
+            //현재 i가 120약수 인지
+            if(N % i == 0){
+                cnt++;
+                // 현재 가장 큰 수 120을 제외한 모든 수에 콤마
+                divisor += i + (i < N ? "," : "");
+            }
+        }
+        document.write(`${N}의 약수는 ${divisor}이며 모두 ${cnt}입니당!`)
+    </script>
+</body>
+</html>

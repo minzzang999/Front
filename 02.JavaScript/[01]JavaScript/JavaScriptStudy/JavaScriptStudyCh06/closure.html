@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function closure(init) {
+		var counter = init;
+		
+		return function() {
+			return ++counter;
+		}
+	}
+	
+	var a = closure(10);
+	var b = closure(1);
+	
+	document.write("a : " + a() + "<br/>");
+	document.write("b : " + b() + "<br/>");
+	document.write("a : " + a() + "<br/>");
+	document.write("b : " + b() + "<br/>");
+	document.write(";; : " + closure(100)() + "<br/>");
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

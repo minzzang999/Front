@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>fadeIn(), fadeOut() 메소드를 이용한 모달 이미지 뷰어</title>
+<style>
+	/*	ul 요소의 넓이 지정 및 중앙 배치, 마커제거 */
+	ul { 
+		width: 700px; 
+		margin: auto; 
+		list-style: none;
+	}
+	
+	/* li 요소를 가로 배치 */
+	ul li { float: left; }
+	
+	/* 이미지에 대한 테두리 제거 및 여백 지정 */
+	ul li img { 
+		border: 0; 
+		margin: 10px;
+	}
+	
+	/* 큰 이미지가 화면에 표시되면 이미지 뒤로 반투명을 표현할 배경 레이아웃 - div */
+	div#backgroundLayer {
+	
+		/* 배경에 사용할 레이어(div)를 화면에서 숨긴다. */
+		display: none;
+		
+		/* 배경에 사용할 레이어(div)를 body 크기로 설정한다. */ 
+		position: fixed;		
+		left: 0; top: 0;
+		height: 100%; width: 100%; 
+		background: black;
+		
+		/* 배경 레이어(div)가 화면에 보일 때 반투명이 적용된다. */
+		opacity: 0.60;
+	}
+	
+	/* 이미지를 표시할 이미지 레이아웃 - div */ 
+	#modalLayer {
+	
+		/*	큰 이미지를 표시할 div 요소를 화면에서 숨긴다.
+		 * display: none은 화면에 보이지 않으며 자리도 차지하지 않는다. 
+		 * visibility: hidden은 화면에 보이지 않지만 자리는 차지한다.
+		 **/
+		display: none;		
+		
+		/* 큰 이미지를 표시할 div 요소를 화면 중앙에 배치 */
+		position: fixed;
+		top: 50%; left: 50%;
+		margin-left: -325px; margin-top: -244px;	
+	}
+</style>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(function() {		
+		$("a.modal").click(function(e) {
+			
+			// 배경 레이어를 CSS에서 지정한 투명도로 표시한다.
+			$("#backgroundLayer").fadeIn(300);
+			
+			// CSS에서 불투명도 지정없이 같은 효과를 줄 수 있다.
+			//$("#backgroundLayer").fadeTo(300, 0.6);
+			
+			// 이미지 레이어를 화면에 표시한다.
+			$("#modalLayer").fadeIn(200);
+			
+			// a 요소의 href 속성을 <img>태그에 설정하고 이미지 레이어에 출력한다.
+			$("#modalLayer").html("<img src='" + $(this).attr("href") + "' />");			
+			
+			/* 원본 이미지의 크기가 모두 다르다면 이미지를 중앙에 배치하기 위해서
+			 * 아래와 같이 실행시에 이미지의 출력 위치를 조정해 줘야 한다.  
+			 * 크롬에서는 첫 번째 클릭시 이미지의 크기가 정해지지 않아 크기가 0이
+			 * 되어 화면 중앙에 출력되지 않고 두 번째 클릭시 화면 중앙에 출력된다.
+			 **/
+			//let width = $("#modalLayer > img").outerWidth();
+			//let height = $("#modalLayer > img").outerHeight();
+			//$("#modalLayer").css("margin-left", (-width / 2));
+			//$("#modalLayer").css("margin-top", (-height / 2));			
+			//console.log(width + ", " + height)
+			
+			/* a 요소의 기본 이벤트 진행을 취소한다.
+			 * 아래와 같이 두 가지 방법으로 기본 이벤트 진행을 취소할 수 있다.
+			 **/
+			//return false;
+			e.preventDefault();
+		});
+		
+		// 화면에 표시된 큰 이미지를 클릭한 경우
+		$("#modalLayer").click(function() {			
+			
+			// 이미지 레이어를 숨긴다.
+			$(this).fadeOut(200);
+			
+			// 배경 레이어를 숨긴다.
+			$("#backgroundLayer").fadeOut(300);
+		});
+	});
+</script>
+</head>
+<body>
+	<!-- 
+		a 요소가 클릭되면 큰 이미지가 화면에 표시될 영역 - 기본적으로 숨겨진 상태
+	 -->
+	<div id='backgroundLayer'></div>
+	<div id='modalLayer'></div>
+	<ul>
+		<li>
+			<a href="images/photo1.jpg" class="modal">
+			<img src="images/photo1_thum.jpg" alt="샹드리아" /></a></li>
+		<li>
+			<a href="images/photo2.jpg" class="modal">
+			<img src="images/photo2_thum.jpg" alt="장미" /></a></li>
+		<li>
+			<a href="images/photo3.jpg" class="modal">
+			<img src="images/photo3_thum.jpg" alt="바다" /></a></li>
+		<li>
+			<a href="images/photo4.jpg" class="modal">
+			<img src="images/photo4_thum.jpg" alt="문" /></a></li>
+		<li>
+			<a href="images/photo5.jpg" class="modal">
+			<img src="images/photo5_thum.jpg" alt="바다" /></a></li>
+		<li>
+			<a href="images/photo6.jpg" class="modal">
+			<img src="images/photo6_thum.jpg" alt="꽃" /></a></li>
+		<li>
+			<a href="images/photo7.jpg" class="modal">
+			<img src="images/photo7_thum.jpg" alt="하늘" /></a></li>
+		<li>
+			<a href="images/photo8.jpg" class="modal">
+			<img src="images/photo8_thum.jpg" alt="건물" /></a></li>
+	</ul>
+</body>
+</html>

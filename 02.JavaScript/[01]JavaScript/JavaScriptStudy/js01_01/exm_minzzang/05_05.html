@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function multiplyFunc(num1, num2){
+            if(arguments.length != 2){
+                alert('인수의 수가 다릅니다. 인수는 2개만 입력 하세요');
+                return;
+            }
+            alert(num1);
+            if(num1 == 'undefined' || isNaN(num1)) { num1 = 1; }
+            if(num2 == 'undegined' || inNaN(num2)) { num2 = 1; }
+
+            console.log("multiplyFunc(num1, num2) : " + num1 * num2);
+        }
+
+        function multiplyParams(...nums) {
+		console.log(nums);
+		console.log(arguments);
+		let result = 0;	
+		for(let num of nums) {
+			if(isNaN(num)) { 
+				continue; 
+			}
+			result += num;
+		}
+		console.log("multiplyParams() : " + result);
+	}
+    </script>
+</head>
+<body>
+    <div>
+		<input type="button" value="multiplyFunc(1, 2) 호출" 
+			onclick="multiplyFunc(10, 30)" />
+		<input type="button" value="multiplyParams() 호출"
+			onclick="multiplyParams(10, 20, 'NaN', 30, 40)" />
+	</div>
+</body>
+</html>

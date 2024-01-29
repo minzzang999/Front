@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function circle10() {
+            document.write(`반지름이 10인 원의 넓이: ${10 * 10 * 3.14}<br>`);
+        }
+
+        circle10();
+
+        let rectangle = function(width, height){
+            return width * height;
+        }
+
+        function triangle(width, height){
+            return width * height / 2;
+        }
+
+        document.write('사각형의 넓이 :' + rectangle(10, 20)+'<br/>');
+        document.write('삼각형의 넓이 :' + triangle(20, 5) + '<br/');
+
+        function multiply(x,y = 5, z = 10){
+            console.log("z :" + z);
+            return x * y * z;
+        }
+
+        document.write("<h2>매개변수에 기본 값이 있는 함수</h2>");
+        document.write(multiply(10, 30) + '<br>');
+
+        document.write("<h2>반환 값이 없는 함수의 반환 값</h2>");
+        let returnValue = circle10();
+        document.write(returnValue + '<br>');
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

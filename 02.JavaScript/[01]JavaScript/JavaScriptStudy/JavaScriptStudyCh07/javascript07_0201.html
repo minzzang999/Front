@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>새 창 띄우기 - SubWindow</title>
+<script>	
+	/* window 객체의 onload 속성에 이벤트를 처리할 이벤트 핸들러 함수를 아래와
+	 * 같이 등록하면 load 이벤트가 발생했을 때 자바스크립트 시스템이 핸들러 함수를
+	 * 호출해 준다. load 이벤트는 현재 html 문서의 모든 구성 요소 즉 문서 객체,
+	 * 외부 연결파일(css, javascript, 이미지) 등이 모두 메모리에 로드되었을 때
+	 * 발생하는 이벤트 이다. 
+	 **/	 
+	window.onload = function() {
+		
+		// html 문서에서 id가 btnInput인 문서 객체를 구한다.
+		let btnInput = document.querySelector("#btnInput");
+		
+		/* 표준 이벤트 모델을 이용해 이벤트 처리함수 등록
+		 * 입력하기 버튼이 클릭되었을 때 처리할 이벤트 핸들러 함수를 등록
+		 **/
+		btnInput.addEventListener("click", function() {
+			// 주소 입력상자에 입력된 값을 읽어온다. 
+			let address = document.querySelector("#address").value;
+			
+			// 현재 창을 열어준 부모 창 폼의 주소 입력 상자에 주소를 설정한다.
+			opener.parentForm.address.value = address;
+			
+			// 현재 창을 닫는다.
+			self.close();
+		});
+	}
+</script>
+</head>
+<body>
+	주소 입력 : <input type="text" name="address" id="address">
+	<input type="button" id="btnInput" value="입력하기">
+</body>
+</html>

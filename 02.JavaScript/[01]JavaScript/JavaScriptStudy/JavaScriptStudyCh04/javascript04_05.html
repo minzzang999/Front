@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>while 반복문과 do while 반복문</title>
+<script>
+	let i = 0;
+	
+	// sum을 초기화 하지 않으면 NaN(Not a Number)
+	let sum = 0; 
+	
+	/* while 문은 조건식이 거짓일 때 단 한 번도 실행되지 않는다.
+	 * while(조건식) { 조건이 참인 동안 실행 }
+	 */
+	while(i < 100) {
+		
+		/* while 문은 for 문과 같이 증감식 같은 것이 없으므로 while 문 안에서
+		 * 조건식을 거짓으로 만들 수 있는 코드를 작성하지 않으면 무한 반복문이 된다.
+		 **/
+		i++;		
+		if(i % 2 == 0) {
+			sum += i;	
+		}
+	}
+	document.write('while문의 1 ~ 100까지 짝수 합 : ' + sum + "<br/>");	
+		
+	i = 0;
+	sum = 0;
+	
+	/* do~while 문은 최소 한 번은 실행을 한다.
+	 * do { 먼저 실행된 후에 조건식이 참인지 확인  } while(조건식);
+	 **/
+	do {
+		
+		/* do~while 문도 while 문과 마찬가지로 do~while 문의 실행 문장 안에서
+		 * 조건식을 거짓으로 만들 수 있는 코드를 작성하지 않으면 무한 반복문이 된다.
+		 **/
+		i++;
+		if(i % 2 == 1) {
+			sum += i;
+		}		
+	} while(i < 100);
+	document.write('do while문의 1 ~ 100까지 홀수의 합 : ' + sum);
+</script>
+</head>
+<body></body>
+</html>

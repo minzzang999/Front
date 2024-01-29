@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //화살표 함수
+        // let func = (매개변수) => {함수 본문}
+        let circle10 = () => {
+            document.write(`반지름이 10인 원의 넓이 : ${10*10*3.14}<br>`);
+        }
+        circle10();
+        let circle0 = radius => radius * radius * 3.14 ; // 내용이 한줄인 경우 {} 생략가능
+        document.write(circle0(5) + "<br>");
+
+        let rectagle = (width, height) => width * height;
+        let triangle = (width, height) => width * height / 2;
+        document.write(rectagle(10, 20) + "<br>");
+     
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

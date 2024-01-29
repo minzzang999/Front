@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM 트리 탐색하기</title>
+<script>	
+	/* DOM 트리에서 부모, 자식, 형제간의 관계를 이용한 요소 노드 탐색
+	 * Element 객체의 children, parentEelement, previousElementSibling, 
+	 * nextElementSibling, firstElementChild, lastElementChild 프로퍼티는
+	 * DOM 트리에서 요소 노드를 대상으로 탐색할 수 있는 프로퍼티들 이다.
+	 **/
+
+	// HTML 문서의 모든 구성 요소가 메모리에 준비되면
+	window.onload = function() {
+		
+		// DOM에서 id가 container인 요소를 찾아 HTMLElement 객체로 읽어온다.
+		const container = document.getElementById("container");
+		
+		/* container의 자식 요소 중 index 1번째 자식을 HTMLElement 객체로 읽어온다.
+		 * HTMLElement는 12가지 노드의 종류 중에서 요소 노드의 정보를 담은 객체이다.
+		 * container의 index 1번째 자식은 첫 번째 class="content" 요소이다.
+		 **/
+		const content1 = container.children[1];
+		console.log(content1);
+		//console.dir(content1)
+
+		/* content1의 바로 다음 형제 요소의 index 1번째 자식 요소의 모든 자식 요소를		
+		 * 읽어온다. 즉 id='done'의 모든 자식 요소를 HTMLCollection 객체로 읽어온다. 
+		 **/
+		const doneList = content1.nextElementSibling.children[1].children;
+		console.log(doneList);
+
+		/* doneList의 index 0번 요소의 부모 요소의 첫 번째 자식 요소 선택
+		 * 'HTML 기본 태그'가 내용인 요소를 선택하여 HTMLElement 객체로 가져옴
+		 **/
+		console.log(doneList[0].parentElement.firstElementChild)
+
+		/* doneList의 index 0번 요소의 부모 요소의 마지막 자식 요소 선택
+		 * 'JavaScript 제어문'이 내용인 요소를 선택하여 HTMLElement 객체로 가져옴
+		 **/
+		console.log(doneList[0].parentElement.lastElementChild)
+
+		/* 다음에서 doneList[0]은 "HTML 기본 태그"가 내용으로 있는 li 요소이며 이 요소의
+		 * 부모 요소(id='done')의 부모 요소(class='content')를 선택하고 바로 앞의 형제 
+		 * 요소(class='content')를 선택한다. 그리고 그 앞의 형제 요소(class='header')를
+		 * 선택하여 HTMLElement 객체로 읽어온다. 
+		 **/
+		const header = doneList[0].parentElement.parentElement
+											.previousElementSibling.previousElementSibling;
+		console.log(header);
+	
+		/* childNodes 프로퍼티는 여러 유형의 Node 객체가 담기 NodeList가 반환된다.
+		 * 위에서 사용한 요소 노드만 담긴 HTMLCollection 객체와는 다르게 Node 객체가
+		 * 담긴 NodeList 객체는 DOM에 존재하는 모든 Node를 가져오기 때문에 가져온
+		 * 리스트의 목록에 접근하면 ElementNode(요소 노드)만 존재하는 것이 아니라
+		 * ElementNode를 비롯한 TextNode, CommentNode 등등 다양한 노드가 있다.
+		 * 실제로 대부분의 작업은 요소 노드를 대상으로 이루어지므로 이 예제 앞쪽의
+		 * 요소 노드에 접근하는 방법을 잘 숙지하면 된다. 많지는 않겠지만 특별한 경우
+		 * 요소 노드가 아니라 그 외의 노드 타입에 접근해 할 경우가 있을 수도 있으므로
+		 * 요소 노드외의 다양한 유형의 노드 타입이 있다는 것을 잘 기억해 두자. 
+		 * 노드 타입 참고 : https://dom.spec.whatwg.org/#interface-node
+		 **/
+		let nodeList = container.childNodes[3].childNodes
+		console.log(nodeList);
+		for(node of nodeList) {
+			console.log(node);
+		}
+	}
+</script>
+</head>
+<body>
+	<div id="container">
+		<div class="header">
+			<h1>DOM Tree</h1>
+		</div>		
+		<div class="content">
+			<!-- 앞으로 스터디 할 목록 -->
+			<h2>프로그래밍 스터디 계획</h2>
+			<ul id="plan">
+				<li class="plan-list">JavaScript 함수</li>
+				<li class="plan-list">JavaScript DOM</li>
+				<li class="plan-list">JavaScript Event</li>
+				<li class="plan-list">jQuery 함수 선택자</li>					
+				<li class="plan-list">jQuery Effect</li>
+			</ul>
+		</div>
+		<div class="content">
+			<!-- 완료된 스터디 목록 -->
+			<h2>프로그래밍 스터디 완료</h2>
+			<ul id="done">
+				<li class="done-list">HTML 기본 태그</li>
+				<li class="done-list">HTML5 시멘틱 태그</li>
+				<li class="done-list">CSS3 선택자</li>
+				<li class="done-list">CSS3 박스모델</li>
+				<li class="done-list">JavaScript 제어문</li>
+			</ul>
+		</div>
+	</div>		
+</body>
+</html>

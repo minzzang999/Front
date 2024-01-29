@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>navigator 객체를 이용해 브라우저 정보 접근하기</title>
+<script>
+	//문서 객체가 모두 로딩 되면 이벤트를 처리할 이벤트 핸들러 등록 
+	window.onload = function() {
+		// 사용자 웹 브라우저와 운영체제의 종합 정보를 반환한다.
+		let userAgent = navigator.userAgent;
+		
+		// 웹 브라우저의 코드명을 반환한다. 현재 모든 브라우저는 Mozilla를 반환한다.
+		let appCodeName = navigator.appCodeName;
+		
+		// 웹 브라우저의 이름을 반환한다. 현재 모든 브라우저는 Netscape를 반환한다.
+		let appName = navigator.appName;
+			
+		// 웹 브라우저의 버전 정보를 반환한다.현재 모든 브라우저는 5.0(Windows)를 반환한다.
+		let appVersion = navigator.appVersion;
+		
+		// 웹 브라우저가 사용하는 언어 정보를 반환한다. 한국어인 경우 ko-KR을 반환한다.
+		let language = navigator.language;
+		
+		// 웹 브라우저 엔진 이름을 반환 한다. 크롬 Gecko, IE Gecko
+		let product = navigator.product;
+		
+		/* 사용자 컴퓨터의 운영체제의 bit 정보를 반환한다. 윈도우 64bit를 
+		 * 사용하더라도 브라우저가 32bit를 사용한다면 Win32가 반환된다. 
+		 */
+		let platform = navigator.platform;
+		
+		// 온라인 상태 여부를 반환한다. 인터넷이 연결되어 있는 상태는 true를 반환한다.
+		let onLine = navigator.onLine;
+		
+		let result = ""
+		result += "<ul>";
+		result += "		<li>userAgent : " + userAgent + "</li>";
+		result += "		<li>appCodeName : " + appCodeName + "</li>";
+		result += "		<li>appName : " + appName + "</li>";
+		result += "		<li>appVersion : " + appVersion + "</li>";
+		result += "		<li>language : " + language + "</li>";
+		result += "		<li>product : " + product + "</li>";
+		result += "		<li>platform : " + platform + "</li>";
+		result += "		<li>onLine : " + onLine + "</li>";
+		result += "</ul>";
+		
+		/* 문서에서 id가 result인 문서객체를 선택하고
+		 * 이 요소의 내용을 result의 내용으로 변경한다. 
+		 **/
+		let div = document.querySelector("#result");
+		div.innerHTML = result;
+	}
+</script>
+</head>
+<body>
+	<h2>사용자 웹 브라우저 정보</h2>
+	<div id="result"></div>
+</body>
+</html>

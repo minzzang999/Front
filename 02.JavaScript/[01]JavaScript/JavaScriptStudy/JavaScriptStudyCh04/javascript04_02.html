@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>for 문에서 if 문 사용하기</title>
+<script>	
+	document.write("<h2>1 ~ 100까지 짝수와 홀수의 합 구하기ㅏ</h2>");
+	let oddSum = 0;
+	let evenSum = 0;
+	
+	// 반복문을 돌면서 if 문을 이용해 짝수의 합과 홀수의 합을 구한다.
+	for(let i = 1; i <= 100; i++) {
+		
+		/* 반복문 안에서 특정 조건에 해당하는지 판단하기 위해서 if 문 사용
+		 * 현재 i를 2로 나누어 나머지가 0이면 짝수 그렇지 않으면 홀수로 판단
+		 **/
+		if(i % 2 == 0) {
+			evenSum += i;
+			
+		} else {
+			oddSum += i;
+		}
+	}
+	document.write("1 ~ 100까지 짝수의 합 : " + evenSum + "<br>");
+	document.write("1 ~ 100까지 홀수의 합 : " + oddSum + "<br>");
+	
+	document.write("<h2>1 ~ 100까지 3의 배수와 개수 그리고 합계 구하기</h2>");
+	let num = 3;
+	let count = 0;
+	let sum = 0;
+	let nums = "";
+	
+	for(let i = 1; i <= 100; i++) {
+		
+		/* 반복문 안에서 if 문을 이용해 3의 배수인지 판단
+		 * 어떤 수를 3으로 나눠서 그 나머지가 0이면 3의 배수
+		 **/
+		if(i % num == 0) {
+			
+			// 3의 배수를 콤마(,)로 구분해 문자열로 저장
+			nums += (100 - num >= i) ? i + ", " : i;
+			
+			// 3의 배수를 sum에 누적하여 더함
+			sum += i;
+			
+			// 3의 배수의 count 변수 값을 하나씩 증가
+			count++; // count = count + 1;			
+		}
+	}
+	document.write("1 ~ 100까지 3의 배수 :<br>" + nums + "<br>");
+	document.write("3의 배수의 개수 : " + count + ", 합계 : " + sum + "<br>");	
+</script>
+</head>
+<body></body>
+</html>
+
+
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>웹 페이지에서 jQuery 사용하기</title>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<!-- CDN(Content Delivery Network)을 이용해 jQuery를 참조할 수 있다.  -->
+<!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+
+<!-- 운영 서버의 특정 위치에 다운로드 받아서 jQuery를 참조할 수 있다. -->
+<script src="js/jquery-3.3.1.min.js" ></script>
+<script>
+	/* jQuery()는 전역 함수로 인수를 분석해 jQuery 객체를 생성하는 역할을 한다.
+	 * 인수로 지정할 수 있는 데이터는 JavaScript에서 사용하는 객체나 함수, 
+	 * DOM을 탐색하고 조작하기 위해 CSS에서 사용하는 선택자 등을 지정할 수 있다. 
+	 * jQuery 소스 파일을 살펴보면 아래와 같이 전역함수로 선언되어 있고 window 
+	 * 객체의 jQuery와 $ 속성으로 jQuery 함수가 등록되어 있는 것을 볼 수 있다.
+	 *
+	 * jQuery = function(selector, context ) { ... }
+	 * window.jQuery = window.$ = jQuery;
+	 **/
+	jQuery(document).ready(function() {	
+		
+		/* html() 메소드는 지정한 요소 안에 태그를 포함한 내용을 설정하거나 반환한다.
+		 * HTML 태그가 적용되어 화면에 표시되므로 아래는 div 요소의 하부에 h2 요소로
+		 * 추가된다.
+		 **/
+		jQuery("div").html("<h2>안녕 jQuery - html()</h2>");		
+	});
+	
+	/* jQuery도 자바스크립트이므로 변수나 함수의 이름으로 $를 사용할 수 있다.
+	 * jQuery 소스에서 $는 jQuery의 또 다른 식별자 즉 별칭으로 선언되어 있으므로
+	 * 위에서 사용했던 jQuery() 함수를 아래와 같이 $() 함수로 함축하여 사용할 수 있다.
+	 **/
+	$(document).ready(function() {	
+		
+		/* text() 메소드는 지정한 요소 안에 텍스트를 설정하거나 반환한다.
+		 * HTML 태그가 적용되지 않으므로 아래는 h2 요소가 일반 텍스트 처럼 표시된다.
+		 **/
+		$("#jquery2").text("<h2>Hi jQuery - text()</h2>");
+	});
+	
+	// 위에서 사용한 $(document).read()를 아래와 같이 함축하여 사용할 수 있다.
+	$(function() { 
+		
+		// jQuery의 메소드는 jQuery 객체를 반환하므로 아래와 같이 메소드 체이닝이 가능하다.
+		$("#jquery3").css("width", "500px").css("height", "250px")
+			.css("border", "1px dotted blue")
+			.text("안녕 제이쿼리");
+	});
+</script>
+</head>
+<body>
+	<div id="jquery1"></div>
+	<div id="jquery2"></div>
+	<div id="jquery3"></div>
+</body>
+</html>

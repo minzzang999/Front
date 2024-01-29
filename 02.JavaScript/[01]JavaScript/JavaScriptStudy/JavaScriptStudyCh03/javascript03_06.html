@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>삼 항 연산자</title>
+<script>
+	/* Prompt 대화상자는 사용자로부터 데이터를 입력 받을 수 있는 대화상자로
+	 * 사용자가 Prompt 대화상자의 창을 강제로 닫거나 취소 버튼을 클릭하면 
+	 * null을 반환하고 확인 버튼을 클릭하면 대화상자에 입력된 문자열을 반환한다.
+	 * 참고로 prompt() 함수는 window 객체에 정의되어 있는 함수이다.
+	 **/
+	let input = prompt("숫자를 입력해주세요", 0);
+	
+	/* 삼 항 연산자는 조건 연산자라고도 하면 피연산자가 3개라 삼 항 연산자라고 부른다.
+	 * 조건 ? 조건이 참일 때 반환 값 : 조건이 거짓일 때 반환 값
+	 **/	
+	let result = input % 2 == 0 ? "짝수" : "홀수";
+	console.log(input + "은 " + result);
+	
+	// 삼 항 연산자는 다음과 같이 여러 번 중첩하여 사용할 수 있다.
+	result = input > 0 ? "양수임" : 
+					input == 0 ? "0임" : 
+						input < 0 ? "음수임" : "값이 입력되지 않음"
+	console.log(input + "은 " + result);
+</script>
+</head>
+<body></body>
+</html>

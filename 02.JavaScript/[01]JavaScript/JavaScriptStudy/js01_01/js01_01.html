@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        let str = '문자열 리터럴'
+        let booleanval = false;
+        let func = function(){
+            document.write("함수설정");
+        }
+
+        let arr = ["배열 데이터", 123, true];
+
+        let obj = {
+            key: 'value',
+            num: 100,
+            func: function(){
+             console.log("obj의 함수");   
+            }
+        }
+
+        document.write("arr"+ arr +"<br>");
+        func();
+        document.write("<br>" + obj.func);
+    </script>
+</body>
+</html>

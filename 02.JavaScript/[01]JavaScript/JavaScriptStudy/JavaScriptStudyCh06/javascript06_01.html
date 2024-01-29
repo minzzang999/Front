@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>객체를 정의하는 방법</title>
+<script>
+/* 1. 객체 리터럴 방식으로 객체 정의하기
+ * 자바스크립트에서 객체를 표기하는 방법을 JSON(JavaScript Object Notation)이라고 한다. 
+ * 참고 사이트 : https://www.json.org/json-ko.html
+ **/
+const Student = {
+	
+	/* 객체는 아래와 같이 데이터와 기능으로 구성되어 있으며 데이터는 
+	 * 변수로 기능은 함수로 표현된다. 객체 안에 존재하는 변수를 
+	 * 속성(Property)이라 하고 함수를 메소드(Method)라 부른다.
+	 * 다시 말해 객체는 속성과 메서드를 묶어서 하나의 데이터로 만든 것이다.
+	 **/
+	이름: '홍길동',		
+	학년: 3,	
+	toString: function() {
+		return '<p>'
+					+ '이름 : ' + this.이름 + '<br/>'
+					+ '학년 : ' + this.학년 + '<br/>' 
+				+ '</p>';
+	}	
+};
+
+// 2. 익명함수 방식으로 객체 정의하기
+const Member = function(name, id, address) {
+	this.name = name;
+	this.id = id;	
+	this.address = address;
+	this.toString = function() {
+		return '<p>'
+					+ '이 름 : ' + this.name + '<br/>'
+					+ '아이디 : ' + this.id + '<br/>'				
+					+ '주 소 : ' + this.address + '<br/>'
+				+ '</p>';
+				
+	};
+};
+
+// 3. 생성자 함수 방식으로 객체 정의하기
+function Human(name, age, gender) {
+	this.name = name;
+	this.age = age;
+	this.gender = gender;
+	this.toString = function() {
+		return '<p>' 
+					+ this.name + '(' + this.gender + '-' + this.age + ')<br/>'
+				+ '</p>';
+	};
+}
+
+/* 생성자 함수와 익명 함수 방식으로 객체를 정의하면 아래와 같이 
+ * new 연산자를 사용해 서로 다른 속성을 가지는 객체를 무한정 생성할 수 있다.
+ * new 연산자를 사용해 객체를 생성하는 것을 "인스턴스를 생성한다." 라고 말 한다.
+ **/
+let member = new Member("홍길동", "midas", "서울 구로구");
+let human = new Human("김유신", 25, "남성");
+
+// 아래와 같이 출력 함수에서 참조 변수를 사용하면 toString()이 자동으로 호출된다.
+document.write("<h2>객체를 정의하기</h2>");
+document.write(Student);
+document.write(member);
+document.write(human);
+</script>
+</head>
+<body></body>
+</html>

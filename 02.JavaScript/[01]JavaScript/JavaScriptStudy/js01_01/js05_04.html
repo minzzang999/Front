@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1. 객체 리터럴 방식
+        const Student = {
+            이름 : "김정민",
+            학년 : 3,
+            toString : function(){
+                return "<p>"
+                    + "이름 :" + this.이름 + "<br>"
+                    + "학년 :" + this.학년 + "<br>"
+                    + "<p>"
+            }
+        };
+        // 2. 익명 함수 방식
+        const Member = function(name, id, address){
+            this.name = name;
+            this.id = id;
+            this.address = address;
+            this.toString = function(){
+                return "<p>"
+                    + "이름 :" + this.name + "<br>"
+                    + "아이디 :" + this.id + "<br>"
+                    + "주소 :" + this.address + "<br>"
+                    + "<p>"
+            }
+        };
+        // 3. 생성자 함수 방식
+        function Human(name, age, gender){
+            this.name = name;
+            this.id = id;
+            this.address = address;
+            this.toString = function(){
+                return "<p>"
+                    + this.name + '('+ this.gender + '_' + this.age +')<br/>'
+                    +'</p>'
+            }
+        };
+
+        console.log(Student);
+        document.write(Student);
+        const member = Member("홍길동", "midas", "서울 관악구 봉천동");
+        let human = Human("김유신", 25, "남성" );
+
+        document.write(member.name);
+        document.write(human["age"]);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

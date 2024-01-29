@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>통합 이벤트 등록 메서드와 제거 메소드 2</title>
+<style type="text/css">	
+	.mouseover {
+		border: 2px dotted blue;
+		opacity: 0.5;
+	}
+	.mouseout {
+		border: none;		
+	}
+</style>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>		
+	$(function() {
+		
+		/* 이벤트 등록 메소드 
+		 * one() : 한 번만 이벤트 등록
+		 *		 
+		 * 통합 이벤트 등록 메소드와 제거 메소드 - jQuery 1.7부터 지원
+		 * on() : 기본 이벤트 핸들러 및 이벤트 위임 방식 이벤트 핸들러 등록
+		 * off() : on() 메서드로 등록한 이벤트 핸들러를 제거하는 메소드
+		 **/
+		// on() 메소드를 이용해 click 이벤트에 대한 단일 이벤트 등록
+		$('#img1').on('click', function(e) {
+			$(this).parent().clone()	.appendTo('body');
+			
+			alert($('img').length + ' 번째에 이미지를 추가하였습니다.\n'
+				+ '마우스의 X좌표 : ' + e.pageX 
+				+ ', Y좌표 : ' + e.pageY
+				+ ', 눌린버튼 : ' + e.which);				
+		});
+		
+		/* one() 메소드를 이용한 click 이벤트에 대한 단일 이벤트 등록
+		 * 이벤트를 한 번만 실행하려면 one() 메소드를 이용하면 편리하다.	
+		 **/
+		$('#img2').one('click', function(e) {
+			$(this).parent().clone()	.appendTo('body');			
+		});
+			
+		/* 기본 이벤트 핸들러 등록
+		 * 현재 존재하는 문서 객체만 이벤트 핸들러를 등록할 수 있으며
+		 * 동적으로 추가되는 문서 객체에는 이벤트 핸들러가 등록되지 않는다.
+		 **/
+		$('#img2').on('mouseenter', function(e) {
+			$(this).parent().prev().clone().appendTo('body');			
+		});
+		
+		/* 이벤트 위임 방식 이벤트 핸들러 등록
+		 * 이벤트 위임 방식은 상위 요소에 이벤트 핸들러를 등록하는 방식으로
+		 * 이벤트 버블링을 활용하기 때문에 동적 생성해 추가되는 문서 객체나
+		 * 기존 객체를 복제한 문서 객체 등에 이벤트 핸들러를 등록할 수 있다.
+		 **/
+		$(document).on('mouseenter', '#img3', function(e) {
+			$(this).parent().clone().appendTo('body');			
+		})	
+	});
+</script>
+</head>
+<body>
+	<div id="container1">
+		<img id="img1" src="images/modern_javascript.jpg" />
+		modern_javascript.jpg
+	</div>
+	<div id="container2">
+		<img id="img2" src="images/make_html5.jpg" />
+		make_html5.jpg
+	</div>
+	<div id="container3">
+		<img id="img3" src="images/web_recipe.jpg" />
+		web_recipe.jpg
+	</div>
+</body>
+</html>

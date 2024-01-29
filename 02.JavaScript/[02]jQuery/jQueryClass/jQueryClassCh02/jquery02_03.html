@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>filter()와 find() 메서드를 이용한 DOM 탐색</title>
+<style type="text/css">
+</style>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+
+<script>		
+	$(function() {
+
+		$('#container')
+			.css('position', 'relative')							
+			.css('width', '600px');
+		
+		$('#container > .imgs')
+			.css('float', 'left')
+			.css('width', '160px')
+			.css('height', '150px')
+			.css('margin', '10px 10px')
+			.css('text-align', 'center');
+		
+		$('#result')
+			.css('width', '600px')
+			.css('height', '250px')
+			.css('margin', '10px 10px')							
+			.css('border', '1px solid red');
+	});
+	
+	
+	
+</script>
+</head>
+<body>
+	<div id="container">
+		<div class="imgs">
+			<img src="images/js_coreguide.jpg" /><br/>
+			<label>js_coreguide.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/js_corepattern.jpg" /><br/>
+			<label>js_corepattern.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/web_publishing.jpg" /><br/>
+			<label>web_publishing.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/web_recipe.jpg" /><br/>
+			<label>web_recipe.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/modern_html5.jpg" /><br/>
+			<label>modern_html5.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/modern_javascript.jpg" /><br/>
+			<label>modern_javascript.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/make_html5.jpg" /><br/>
+			<label>make_html5.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/javascript_guide.jpg" /><br/>
+			<label>javascript_guide.jpg</label>
+		</div>
+		<div class="imgs">
+			<img src="images/js_webapplication.jpg" /><br/>
+			<label>js_webapplication.jpg</label>
+		</div>
+		<div id="buttons">
+			<button onclick="filterSearch('selector')">
+				filter()로 탐색</button>
+			<button onclick="filterSearch('function')">
+				filter(function(){})로 탐색</button>
+			<button onclick="findSearch('img')">
+				find().each()로 탐색</button>
+			<button onclick="findSearch('clone')">
+				find()로 탐색</button>			
+		</div>
+	</div>	
+	<div id="result"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

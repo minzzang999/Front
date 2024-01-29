@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            const plan = document.getElementById("plan");
+
+            const liTags = document.getElementsByTagName('li');
+            console.log(liTags);
+
+            console.log(liTags[3], " - ",  liTags.length);
+            for(li of liTags) {
+                console.log(li);
+            }
+            const doneList = document.getElementsByClassName('done-list'); 
+            console.log(doneList);
+
+            const content = document.querySelector('.plan-list');
+            console.log(content);
+
+            const contentAll = document.querySelectorAll(".plan-list");
+            console.log(contentAll);
+
+            contentAll.forEach((value, i) => {
+                console.log(i, value);
+            });
+        }
+    
+        
+    </script>
+</head>
+<body>
+    <div id="container">
+		<div class="header">
+			<h1>DOM Tree</h1>
+		</div>		
+		<div class="content">
+			<!-- 앞으로 스터디 할 목록 -->
+			<h2>프로그래밍 스터디 계획</h2>
+			<ul id="plan">
+				<li class="plan-list">JavaScript 함수</li>
+				<li class="plan-list">JavaScript DOM</li>
+				<li class="plan-list">JavaScript Event</li>
+				<li class="plan-list">jQuery 함수 선택자</li>					
+				<li class="plan-list">jQuery Effect</li>
+			</ul>
+		</div>
+		<div class="content">
+			<!-- 완료된 스터디 목록 -->
+			<h2>프로그래밍 스터디 완료</h2>
+			<ul id="done">
+				<li class="done-list">HTML 기본 태그</li>
+				<li class="done-list">HTML5 시멘틱 태그</li>
+				<li class="done-list">CSS3 선택자</li>
+				<li class="done-list">CSS3 박스모델</li>
+				<li class="done-list">JavaScript 제어문</li>
+			</ul>
+		</div>
+	</div>		
+</body>
+</html>

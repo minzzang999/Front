@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클래스로 객체 만들기</title>
+<script>
+	/* ECMAScript2015(ES6)에서 자바스크립트도 클래스라는 개념이 도입되었다.
+	 * 그러나 자바스크립트의 클래스는 다른 프로그래밍 언어의 클래스와 동작 방식이
+	 * 다르다. 자바스크립트에서 사용하는 클래스는 기존의 생성자 함수 방식을
+	 * 조금 더 쉽게 표현할 수 있도록 변경한 것으로 완전한 클래스 방식은 아니다.	 
+	 *	
+	 * 클래스를 정의할 때는 다음과 같이 class 다음에 클래스명을 작성하면 된다.
+	 **/
+	class Member {
+
+		/* 클래스 안에서 생성자와 메서드를 분리해 작성한다.
+		 * 생성자는 클래스로 인스턴스를 생성할 때 호출하는 함수이다.
+		 * 생성자를 통해서 인스턴스가 가지는 속성을 초기화 할 수 있다.
+		 **/
+		constructor(name, id, address) {
+			this.name = name;
+			this.id = id;	
+			this.address = address;
+		}
+
+		// 메소드는 다음과 같이 메소드 이름만 정의해 내용을 작성하면 된다.
+		toString() {
+			return '<p>'
+					+ '이 름 : ' + this.name + '<br/>'
+					+ '아이디 : ' + this.id + '<br/>'				
+					+ '주 소 : ' + this.address + '<br/>'
+				+ '</p>';
+		}
+	}
+
+	// 다음과 같이 클래스 표현식으로 클래스를 정의할 수 있다.
+	const Student = class {
+		constructor(name, grade) {			
+			this.name = name;
+			this.grade = grade;
+		}
+		toString() {
+			return '<p>'
+					+ '이름 : ' + this.name + '<br/>'
+					+ '학년 : ' + this.grade + '<br/>' 
+				+ '</p>';
+		}
+	}
+	
+	/* 클래스도 생성자 함수방식과 마찬가지로 인스턴스를 생성할 때는 아래와 같이
+	 * new 연산자를 사용하며 서로 다른 속성을 가지는 객체를 무한정 생성할 수 있다.
+	 **/
+	let member = new Member("홍길동", "midas", "서울 구로구");
+	let s1 = new Student("김유신", 2);
+	let s2 = new Student("어머나", 3);
+	
+	/* 자바스크립트에서 객체에 접근하는 방법은 아래와 같이 객체를 참조하는 변수와
+	 * 닷 연산자(.)를 사용해 객체 안의 프로퍼티와 메서드에 접근 할 수 있다. 또한
+	 * 배열과 같이 대괄호([])를 이용해 접근할 수 있는데 이때는 숫자로 된 index를
+	 * 사용하는 것이 아니라 key를 사용해 프로퍼티와 메서드에 접근할 수 있다.
+	 **/  
+	document.write("<h2>클래스로 객체 만들기</h2>");
+	document.write(`닷 연산자(.)를 이용해 접근 : ${member.name}<br/>`);
+	document.write(`객체의 속성(key)을 이용해 접근 : ${s1["name"]}<br/>`);
+	document.write(s2["toString"]());
+</script>
+</head>
+<body></body>
+</html>

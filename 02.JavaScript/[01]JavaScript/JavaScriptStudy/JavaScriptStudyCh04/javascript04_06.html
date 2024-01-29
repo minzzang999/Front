@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>break와 continue</title>
+<script type="text/javascript">
+	let i = 0;
+	while(true) {		
+		if(!confirm('계속 하시겠습니까? - while')) { // 사용자가 취소를 선택하였으면
+			alert('while 문 ' + i + '번 실행 후 종료!');
+		
+			// 현재 실행 중인 반복문을 빠져 나간다.
+			break;
+			
+		} else {  // 사용자가 확인을 선택하였으면
+			
+			/* continue를 만나면 while 문의 조건식으로 올라간다.
+			 * 그러므로 아래 i++은 실행되지 않기 때문에 i는 증가되지 않는다.
+			 **/
+			continue;
+		}
+		i++;
+	}	
+</script>
+</head>
+<body></body>
+</html>

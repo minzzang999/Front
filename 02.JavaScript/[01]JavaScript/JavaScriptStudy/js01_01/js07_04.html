@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let timer;
+        let clockStart = function(){
+
+            timer = window.setInterval(function() {
+			
+            let date = new Date();
+            document.getElementById('result').innerHTML =
+                            date.toLocaleTimeString();
+            }, 1000);
+        }
+        
+        window.onload = function(){
+        document.getElementById("result").innerText
+            = "3초 후에 시계가 자동으로 시작됩니다."
+        }
+        
+        let timeout = window.setTimeout(function(){
+            clockStart();
+        }, 3000);
+    </script>
+</head>
+<body>
+    <input type = "button" value="타이머 정지" onclick="clearInterval(timer)">
+    <div id = "result"></div>
+</body>
+</html>

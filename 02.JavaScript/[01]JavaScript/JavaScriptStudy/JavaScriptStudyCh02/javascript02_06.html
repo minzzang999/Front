@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>복합 대입연산자</title>
+<script>		
+	// 다양한 방법으로 변수를 선언하고 초기화
+	let num1 = 10, num2 = 20, num3 = 30, str;
+	
+	/* 아래의 식에서 사용한 "+=", "/=", "%=" 연산자 들은 모두 먼저 더하기(+),
+	 * 나누기(/), 나머지(%) 연산을 수행한 후에 좌측의 변수에 대입하는 두 가지
+	 * 동작(연산)을 수행하는 연산자로 이런 유형의 대입 연산자를 복합 대입연산자라고
+	 * 부른다. 아래에서 num1 += 30;의 동작은 먼저 num1 + 30의 연산을 수행한
+	 * 후에 그 결과를 다시 num1에 대입하게 된다.
+	 **/		 
+	num1 += 30;
+	num2 /= 5;
+	num3 %= 7;	
+	
+	// 문자열과 수치 데이터의 + 연산은 문자열 연결 연산이 된다.
+	document.write('num1 : ' + num1 + ', num2 : ' 
+				+ num2 + ', num3 : ' + num3);
+	document.write('<br/><br/>');
+	
+	str = '<ul>';
+	str += '	<li>자바스크립트 완벽가이드</li>';
+	str += '	<li>JavaScript Cookbook</li>';
+	str += '	<li>자바스크립트 마스터북</li>';
+	str += '</ul>';
+	
+	document.write(str);
+</script>
+</head>
+<body>
+</body>
+</html>

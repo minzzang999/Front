@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>for문과 if문을 이용한 약수 구하기</title>
+</head>
+<body>
+	<h1>for문과 if문을 이용한 약수 구하기</h1>	
+	<script>
+		/* 약수란 어떤 정수 n을 나누어떨어지게 하는 정수를 말한다.
+		 * 만약 정수 n의 약수가 i라면 n을 i로 나누었을 때 나머지가 0이 된다.
+		 * 다음은 정수 120의 약수와 그 개수를 구하여 출력하는 프로그램 이다.
+		 **/
+		const N = 120;		
+		let cnt = 0;
+		let divisor = "";
+		
+		for(let i = 1; i<= 120; i++) {
+			if(N % i == 0) {
+				cnt++;
+				divisor += i + (i < 120 ? ", " : "");
+			}
+		}
+		document.write(`${N}의 약수는 ${divisor}이며 모두 ${cnt}개 입니다.`);
+	</script>
+</body>
+</html>

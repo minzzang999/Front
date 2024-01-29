@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 전파와 기본 이벤트 제어</title>
+<style type="text/css">	
+	.mouseover {
+		border: 2px dotted blue;
+		opacity: 0.5;
+	}
+	.mouseout {
+		border: none;		
+	}
+</style>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	/* 이벤트 전파(Event Propagation)
+	 * 이벤트는 보통 하나의 문서 객체에 대해 발생하지만 서로 중첩된
+	 * 문서 객체에서 상위 또는 하위로 이벤트가 전파되는 특징을 가진다.
+	 * 이벤트 전파는 다음과 같이 이벤트 버블링과 이벤트 캡처링이 있다.
+	 * 	
+	 * - 이벤트 버블링 : 
+	 *	 이벤트가 발생한 객체로부터 순서대로 상위 객체로 이벤트가 전파되는 것을
+	 *	 의미하며 이벤트가 발생한 객체부터 document 객체까지 상위로 전파된다.
+	 *	
+	 * - 이벤트 캡처링 : 
+   *	 document 객체에서 시작해 이벤트가 발생한 객체까지 하위 객체로 이벤트가
+	 *	 전파되는 것을 의미한다.	 
+   *   
+	 * - 이벤트 전파 막기
+	 *	 이벤트 객체의 stopPropagation() 메서드를 사용하면 이벤트 전파를 막을 수 있다.
+	 * 	 e.stopPropagation();
+	 *
+	 * 기본 이벤트(Default Event)
+	 * HTML 문서에서 어떤 요소는 기본적으로 연결된 이벤트 핸들러를 가지고 있어서
+	 * 별도의 이벤트 핸들러를 등록하지 않아도 특정 이벤트가 발생하면 기본적인
+	 * 동작을 하는데 이런 기본 동작을 기본 이벤트(Default Event)라고 부른다.
+	 * 예를 들면 HTML 문서에서 a 요소가 클릭되면 href 속성에 연결된 주소로 이동하는
+	 * 기본 동작을 하는데 이런 기본 동작을 기본 이벤트라고 한다. 이렇게 a 요소와
+	 * 같이 기본 동작이 연결되어 있어서 특정 이벤트가 발생하면 무조건 기본 동작을
+	 * 수행하는 요소들이 있다. 대표적으로 form 요소와 관련있는 입력 컨트롤이 이런
+	 * 기본 동작을 수행하며 checkbox, radio, text 입력 상자와 같이 input 요소가
+	 * 기본 동작을 가지고 있다. checkbox를 예를 들면 사용자가 클릭할 때 마다 체크
+	 * 박스의 항목이 체크 되거나 해제되는 기본 동작을 한다. 이외에도 submit 버튼
+	 * 있으며 submit 버튼이 클릭되면 폼 안에 있는 입력 컨트롤에 입력된 정보를
+	 * form 요소의 action 속성에 지정된 url로 전송하는 기본 동작을 수행한다.
+	 * 만약 폼이 전송될 때 폼 유효성 검사를 수행해서 폼 전송을 취소해야 된다면
+	 * submit 되는 기본 동작을 멈춰야 하는데 이렇게 요소가 가진 기본 이벤트를
+	 * 취소해야 할 때 종종 발생한다.
+	 * 
+	 * - 기본 이벤트 취소
+	 *  이벤트 객체의 preventDefault() 메서드를 사용하면 기본 이벤트를 멈출 수 있다.
+	 *  e.preventDefault();
+	 **/	
+	$(function() {
+		 
+		$('#container').css('width', '350px')
+			.css('height', '350px')
+			.css('border', '1px solid red')
+			.children().css('width', '250px')
+			.css('height', '250px')
+			.css('border', '1px solid blue')
+			.css('margin', '50px auto')
+			.css('line-height', '350px');		
+
+		$('img').on('click', function(e) {
+			$(this).css('border', '3px dotted red');
+			
+			// 이벤트 전파 제거
+			e.stopPropagation();
+		});
+		
+		$('#inner').on('click', function(e) {
+			$(this).css('background', '#ffaaaa');
+		});
+		
+		$('#container').on('click', function(e) {
+			$(this).css('background', '#aaffaa');
+		});
+		
+	  $('#naver').click(function(e) {
+	  					
+			// 기본 이벤트 제거
+			e.preventDefault();
+
+		 /* jQuery를 사용할 때 이벤트 핸들러 안에서 false를 반환하면
+		  * 이벤트 전파와 기본 이벤트 두 가지 모두를 제거할 수 있다.
+			**/
+			//return false;	
+		})
+	});	
+</script>
+</head>
+<body>
+	<div id="container">
+		<div id='inner'>
+			<img src="images/modern_javascript.jpg"></img>
+		</div>
+	</div>
+	<div>
+		<a id="naver" href="http://www.naver.com">네이버 가기</a>
+		<a id="daum" href="http://www.daum.net">다음 가기</a>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>if else if 조건문 - 숫자를 입력 받아서 배수 구하기</title>
+<script>	
+	function inputMultiple() {
+		
+		/* html 문서에서 name 속성의 값이 form1인 폼 안에서 name 속성의 
+		 * 값이 inputNum인 input 요소를 찾아서 이 입력상자에 입력된 값을 읽어온다.
+		 * 폼 안의 컨트롤들은 value 속성을 이용해 값을 설정하거나 읽어올 수 있다. 
+		 **/
+		let inputNum = document.form1.inputNum.value;
+		
+		/* html 문서에서 document 객체의 querySelector() 함수를 이용해서
+		 * 결과를 출력할 id가 result인 문서 객체를 구한다.
+		 **/
+		let result = document.querySelector("#result"); 
+		
+		/* 사용자 입력한 값이 숫자가 아닌지 확인
+		 * isNaN() 함수는 인수의 값이 숫자가 아니면 true 숫자면 false를 반환한다.
+		 **/
+		if(isNaN(inputNum)) {
+			alert('3과 7의 배수를 정수로 입력해주세요')
+		
+		/* 사용자가 입력한 값이 3의 배수인지 확인
+		 * 어떤 수를 3으로 나눠서 나머지가 0이면 그 수는 3의 배수이다.
+		 **/
+		} else if(inputNum % 3 == 0) {
+			
+			/* 결과를 출력할 div 요소의 innerHTML 속성을 이용해 strong 요소를
+			 * 포함하여 결과를 출력한다.
+			 **/			
+			result.innerHTML = 
+				"<strong>입력 값 : " + inputNum + "은 3의 배수 입니다.</strong>";
+		
+		/* 사용자가 입력한 값이 7의 배수인지 확인
+		 * 어떤 수를 7로 나눠서 나머지가 0이면 그 수는 7의 배수이다.
+		 **/
+		} else if(inputNum % 7 == 0) {			
+			result.innerHTML = 
+				"<strong>입력 값 : " + inputNum + "은 7의 배수 입니다.</strong>";
+			
+		} else {			
+			result.innerHTML = 
+				"<strong>입력 값 : " + inputNum + "은 3과 7의 배수가 아닙니다.</strong>"; 			
+		}
+
+		/* 다음 입력을 위해서 이전에 입력한 input 요소의 값을 지운다.  
+		 * html 문서에서 name 속성의 값이 form1인 폼 안에서 name 속성의 
+		 * 값이 inputNum인 input 요소를 찾아서 이 입력상자에 입력된 값을 지운다.
+		 * 폼 안의 컨트롤들은 value 속성을 이용해 값을 설정하거나 읽어올 수 있다. 		 
+		 **/
+		 document.form1.inputNum.value = "";			
+	}	
+</script>
+</head>
+<body>
+	<form name="form1">
+		3의 배수 또는 7의 배수를 입력해 주세요 : <br/><br/>
+		<input type="text" name="inputNum"/>		
+		<input type="button" value="배수 입력" onclick="inputMultiple()"/>
+	</form>
+	<div id="result">
+	</div>
+</body>
+</html>

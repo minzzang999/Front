@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>if else if 조건문 - 배수 구하기</title>
+<script>	
+	let num = 14;
+
+	/* 사용자가 입력한 값이 3의 배수인지 확인
+	 * 어떤 수를 3으로 나눠서 나머지가 0이면 그 수는 3의 배수이다.
+	 **/
+	if(num % 3 == 0) {		 
+		document.write(num + "은 3의 배수 입니다.");
+	
+	/* 사용자가 입력한 값이 7의 배수인지 확인
+	 * 어떤 수를 7로 나눠서 나머지가 0이면 그 수는 7의 배수이다.
+	 **/
+	} else if(num % 7 == 0) {			
+		document.write(num + "은 7의 배수 입니다.");
+		
+	} else {			
+		document.write(num + "은 3과 7의 배수 아닙니다.");
+	}
+</script>
+</head>
+<body>
+</body>
+</html>

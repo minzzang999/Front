@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let docPrint = function(){
+            document.write("<h2>함수 정의하기</h2>");
+            document.write("<ul>");
+            document.write("<li>익명 함수 정의하기</li>");
+            document.write("<li>fuction 예약어로 함수 정의하기</li>");
+            document.write("<li>매개변수가 있는 함수 정의하기</h2>");
+            document.write("<ul>");
+        }
+
+        docPrint();
+
+        function add(num1, num2){
+            document.write(`<p> ${num1} + ${num2} + ${num1 + num2}</p>`);
+        }
+
+        add(10, 20);
+        add();
+
+        function multiply(num1, num2){
+            return `<p>${num1} x ${num2} = ${num1 * num2}</p>`;
+        }
+
+        document.write(multiply(20, 30));
+    </script>
+</head>
+<body> 
+</body>
+</html>

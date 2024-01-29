@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>타이머로 시계 만들기</title>
+<script>	
+	let timer;
+	let clockStart = function() {
+		
+		/* window는 브라우저 객체 모델에서 최상위 객체로 생략이 가능하다.
+		 * setInterval(함수, 밀리초) 메서드는 첫 번째 인수로 지정한 함수를 두 번째
+		 * 인수로 지정한 시간 간격으로 반복해서 호출하는 메서드 이다. 다시 말해 지정한
+		 * 시간 간격으로 함수를 반복해서 실행해 주는 타이머라고 할 수 있다.
+		 * setInterval() 메서드를 취소하려면 clearInterval(참조변수)로 호출하면 된다.
+		 * 아래의 setInterval() 메서드를 취소하려면 clearInterval(timer)로 호출하면 된다.
+		 **/
+		timer = window.setInterval(function() {
+			
+					/* 현재 날짜와 시간 정보를 출력하기 위해 1초 단위로 
+					 * Date 객체를 생성해서 id가 result인 요소에 출력한다. 
+					 **/ 
+					let date = new Date();
+					document.getElementById('result').innerHTML =
+									date.toLocaleTimeString();
+				}, 1000);
+	}
+	
+	// html 문서의 구성요소가 모두 로딩 되면 이벤트를 처리할 이벤트 핸들러 등록 
+	window.onload = function() {
+		document.getElementById('result').innerText = 
+			"3초 후에 시계가 자동 시작됩니다.";
+		
+		/* setTimeout(함수, 밀리초) 메서드는 첫 번째 인수로 지정한 함수를 두 번째 인수로
+		 * 지정한 시간 후에 한 번 호출해 주는 메서드 이다. 다시 말해 지정한 시간이 지나면
+		 * 지정한 함수를 단 한 번 실행해 주는 타이머라 할 수 있다.
+		 * setTimeout() 메서드를 취소하려면 clearTimeout(참조변수)로 호출하면 된다.
+		 * 아래의 setTimeout() 메서드를 취소하려면 clearTimeout(timeout)으로 호출하면 된다.
+		 **/
+		let timeout = window.setTimeout(function() {
+			clockStart();
+		}, 3000);
+	};	
+</script>
+</head>
+<body>
+	<!-- 타이머를 정지하려면 clearInterval(참조변수)로 호출하면 된다. -->
+	<input type="button" value="타이머 정지" onclick="clearInterval(timer)" />
+	<div id="result"></div>
+</body>
+</html>

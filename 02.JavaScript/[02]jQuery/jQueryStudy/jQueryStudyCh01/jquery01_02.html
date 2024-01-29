@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM이 로드되었을 때 jQuery 실행하기</title>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<!-- <script src="js/jquery-1.12.4.min.js" ></script> -->
+<script src="js/jquery-3.3.1.min.js" ></script>
+<script>
+	/* window 객체의 load 이벤트에 함수를 연결하면 웹 페이지에 필요한 모든 자원
+	 * (DOM, css, image 등의 리소스)이 완전히 로드 되었을 때 load 이벤트가
+	 * 발생하여 매개변수로 지정한 함수가 실행되는 반면 jQuery의 ready() 메소드는
+	 * 웹 페이지의 문서 객체 모델(DOM, Document Object Model)이 로드되어
+	 * 이 DOM을 탐색하고 조작할 수 있을 때 매개변수로 지정한 함수가 실행된다.
+	 **/
+	$(document).ready(function() {
+		$('#img1').css('border', '5px solid #FF9898')
+			.css("border-radius", "20px")
+			.css("width", "300px").css("height", "240px");
+		
+		let imgWidth = $('#img1').width();
+		let result = $('#resultReady').text() + imgWidth;
+		$('#resultReady').text(result);
+	});		
+
+	// window 객체의 load 이벤트 핸들러 등록 - 고전 이벤트 방식
+	window.onload = function() {
+		$('#img2').css('border', '5px solid #FF9898')
+			.css("border-radius", "20px")
+			.css("width", "400px").css("height", "320px");
+		
+		let imgWidth = $('#img2').width();
+		let result = $('#resultOnload').text() + imgWidth;
+		$('#resultOnload').text(result);
+	};
+	
+	// window 객체의 load 이벤트 핸들러 등록 - jQuery 3.1 방식
+	$(window).on("load", function() {
+		alert($('#resultReady').text());
+	});
+</script>
+</head>
+<body>	
+	<div id="jQuery1"><img id="img1" src="images/myungjun05.jpg" /></div>
+	<div id="jQuery2"><img id="img2" src="images/myungjun06.jpg" /></div>
+	<div id="resultReady">ready : </div>
+	<div id="resultOnload">onload : </div>	
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>if else 조건문</title>
+<script>
+	function closeWindow() {
+		
+		/* Confirm 대화상자는 사용자가 창을 강제로 닫거나 취소 버튼을 
+		 * 클릭하면 false를 반환하고 확인 버튼을 클릭하면 true를 반환한다.
+		 * confirm() 함수는 window 객체에 정의되어 있는 함수이다.
+		 **/ 
+		let input = confirm('프로그램을 종료 하시겠습니까?')
+		
+		/* if 문은 조건식이 참일 때 실행되는 조건문 이다. 
+		 * if(조건식) { 조건식이 참일 때 실행 }
+		 * if(조건식) { 조건식이 참일 때 실행 } else { 조건식이 거짓일 때 실행 }
+		 **/
+		if(input) {
+			// 현재 브라우저 창을 닫는다.
+			window.close();
+			//this.close();
+			
+		} else {
+			alert('그럴 줄 알았어요..^_^');
+		}
+	}	
+</script>
+</head>
+<body>
+	<!--
+		버튼에 onclick 속성에 호출할 자바스크립트 함수를 지정하여 버튼이 클릭되었을 때
+		필요한 기능을 동작시킨다. 아래와 같이 요소의 이벤트 속성에 이벤트 처리함수를
+		등록하여 이벤트를 처리하는 방식을 인라인 이벤트 모델이라고 한다. 
+	-->	
+	<input type="button" value="현재창 닫기" onclick="closeWindow()"/>
+</body>
+</html>

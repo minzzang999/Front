@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>웹 문서에서 자바스크립트 사용하기</title>
+<style>
+	/* css 주석 - 한 줄 또는 여러 줄 주석 */
+</style>
+<!-- 
+	여기는 HTML 주석 - 자바스크립트 첫 번째 예제(내부 자바스크립트)
+	이전에는 어떤 스크립트 언어를 사용하는지 type 속성에 명시해야 했으나 
+	HTML5에서는 자바스크립트가 공식 스크립트 언어이므로 type을 기술할 필요가 없다. 
+-->
+<script type="text/javascript">
+
+	/* 자바스크립트 여러 줄 주석
+	 * author : 홍길동
+	 * date : 2021년 01월 15일
+	 **/
+	// 경고 창 띄우기 - 자바스크립트 한 줄 주석
+	alert('안녕 하세요 첫 번째 자바스크립트 예제 입니다.');
+</script>
+
+<!-- 
+	여기는 HTML 주석 - 아래는 외부에 있는 자바스크립트(제이쿼리)를 참조하는 예이다.
+	HTML5에서는 자바스크립트가 공식 스크립트 언어이므로 type을 기술할 필요가 없다.
+-->
+<script src="http://code.jquery.com/jquery-3.3.1.mim.js"></script>
+<!-- <script src="./js/jquery-3.3.1.mim.js"></script> -->
+</head>
+<body>
+	<!-- HTML 주석 - 아래는 브라우저 화면에 출력되는 내용 -->
+	자바스크립트 첫 번째 예제
+	
+	<!-- 
+		내부 자바스크립트
+		script 요소는 HTML 문서에서 여러 곳에 중복적으로 사용할 수 있다.
+	-->
+	<script>alert("body의 마지막에 기술된 스크립트 메시지...")</script>	
+</body>
+</html>

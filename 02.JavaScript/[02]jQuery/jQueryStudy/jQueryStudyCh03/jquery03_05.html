@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>체크박스 다루기</title>
+<style>	
+</style>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>	
+	$(function() {   
+		
+		$('.checkWrap').css('padding', '5px');
+		
+		$('form').find('[type=checkbox]').on('click', function() {	
+			
+			// "전체 선택하기" 체크박스가 클릭되었으면 
+			if($(this).is('#checkall')) {	
+				
+				/* 폼 안의 모든 checkbox를 "전체 선택하기" checkbox와 체크 상태를
+				 * 동일하게 설정한다. 요소의 속성을 설정하거나 값을 읽어올 때는 일반적으로
+				 * attr() 메서드를 이용하지만 아래와 같이 checked 속성과 같이 별도로 
+				 * 지정하는 값이 없고 속성만 지정하는 경우에는 prop() 메서드를 사용해야
+				 * 한다. 아래에서 attr() 메소드를 이용하면 한 번은 제대로 동작하나 이후는
+				 * 오동작 한다. checked 속성은 별도로 지정하는 값이 없고 속성만 지정하기
+				 * 때문에 prop() 메서드를 사용해야 한다. disabled, readonly와 같은
+				 * 속성도 prop() 메소드를 사용해야 제대로 동작한다.
+				 **/
+				$('input[type=checkbox]')
+					.prop('checked', $(this).is(':checked'));
+				
+				console.log("chkall - " + $('input[type=checkbox]').length 
+						+ ", " + $(this).is(':checked'));
+			}
+			
+			let amount = 0;
+			let checkCount = 0;
+			
+			/* div 태그중에서 index 0 보다 큰 div 태그의 자식에서 type 속성이 
+			 * checkbox인 문서 객체를 선택하여 if 문과 is() 메서드를 이용해 
+			 * checked된 문서 객체인지 조사하여 합계 금액과 체크된 수를 계산한다.
+			 **/
+			$('div').filter(':gt(0)').find(':checkbox').each(function(index, value) {		
+				
+				// 현재 checkbox가 checked 상태면
+				if($(this).is(':checked')) {
+					amount = amount + parseInt($(this).val());
+					++checkCount;
+				}
+			});
+			console.log(checkCount);
+			
+			// 상품 선택 체크박스가 모두 선택되었는지 조사 			
+			if(checkCount == 4) {
+				// attr() 메서들 이용하면 제대로 동작하지 않는다.
+				//$('input').first().attr('checked', true);
+				$('#checkall').prop('checked', true);
+				
+				console.log("true checkCount = " + checkCount 
+						+ " : "+ $('#checkall').prop('checked'));
+				
+			} else {				
+				// attr(), removeAttr() 메서드를 이용하면 제대로 동작하지 않는다.
+				//$('input').first().attr('checked', false);	
+				//$('#checkall').removeAttr('checked');				
+				$('#checkall').prop('checked', false);
+				
+				console.log("flase checkCount = " + checkCount 
+						+ " : " + $('#checkall').prop('checked'));
+			}
+			
+			/* 기존에 p 태그를 삭제하고 체크박스에서 선택된 상품의 합계 금액을 
+			 * 출력하기 위해 다시 p 태그를 생성해 마지막 div 요소 다음에 추가한다.
+			 **/
+			$('form p').remove();
+			$('<p></p>').insertAfter('div:eq(4)');
+			$('p').text('합계 금액 : ' + amount + '원 입니다.');
+		});		
+	});
+</script>
+</head>
+<body>
+	<form>   
+		<div class="checkWrap">
+			<label><input type="checkbox" id="checkall">전체 선택하기</label>
+		</div>
+		<div class="checkWrap">
+			<label><input type="checkbox" id="pizza" 
+				name="pizza" value="3500">조각피자 3500원</label>
+		</div>
+		<div class="checkWrap">
+			<label><input type="checkbox" id="hotdog" 
+				name="hotdog" value="2500">핫도그 2500원</label>
+		</div>
+		<div class="checkWrap">
+			<label><input type="checkbox" id="coke" 
+				name="coke" value="3000">조각케익 3000원</label>
+		</div>
+		<div class="checkWrap">
+			<label><input type="checkbox" id="fries" 
+				name="fries" value="3000">튀김 3000원</label>
+		</div>
+	</form>  
+</body>
+</html>

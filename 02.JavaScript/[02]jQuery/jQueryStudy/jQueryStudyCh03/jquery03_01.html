@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마우스관련 단일 이벤트 등록 메소드와 이벤트 객체</title>
+<style type="text/css">
+	.mouseover {
+		border: 2px dotted blue;
+		opacity: 0.5;
+	}
+	.mouseout {
+		border: none;		
+	}
+</style>
+<!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>		
+	$(function() {
+		
+		/* jQuery는 다양한 이벤트에 대응하는 이벤트 핸들러를 등록할 수 있도록 
+		 * 각각의 이벤트 이름과 동일한 이벤트 핸들러 등록 메서드를 제공하고 있다.		 
+		 * 
+		 * $(selector).이벤트 등록 메서드(function(event) { });
+		 **/
+		/* 마우스 커서가 img 요소의 외부에서 내부로 들어올 때 mouseenter 이벤트가 발생하며
+		 * 이 이벤트를 처리하기 위해서 아래와 같이 익명 함수를 메서드의 인수로 지정하면 
+		 * mouseenter 이벤트가 발생할 때 마다 jQuery가 이 함수를 호출한다. 이렇게 이벤트에
+		 * 대응하는 함수를 이벤트를 핸들링 하는 함수라는 의미로 이벤트 핸들러라고 부른다.
+		 *
+		 * 이벤트 핸들러 안에서 이벤트 객체에 접근하려면 아래와 같이 첫 번째 매개변수를 
+		 * 지정하고 그 매개변수로 이벤트 객체의 속성이나 메서드를 사용할 수 있다.
+		 **/		 
+		$('img').mouseenter(function(e) {
+			
+			// 이벤트 핸들러 함수 안에서 this는 이벤트가 발생한 문서 객체를 의미한다.
+			$(this).removeClass('mouseout')
+				.addClass('mouseover');
+			
+			/* is(selector) 메소드는 지정한 객체가 selector와 
+			 * 일치하는지 판단해 boolean 값으로 반환하는 메소드
+			 *
+			 * 이벤트 속성에서 target은 이벤트가 발생한 문서 객체를 의미한다.
+			 **/
+			if($(e.target).is('#img3')) {
+				alert('세 번째 이미지로 마우스가 들어 왔네요');
+			}
+		});
+		
+		/* 마우스 커서가 img 요소의 내부에서 외부로 나갈 때 mouseleave 이벤트가 발생하며
+		 * 이 이벤트를 처리하기 위해서 아래와 같이 익명 함수를 메서드의 인수로 지정하면 
+		 * mouseleave 이벤트가 발생할 때 마다 jQuery가 이 함수를 호출한다. 이렇게 이벤트에
+		 * 대응하는 함수를 이벤트를 핸들링 하는 함수라는 의미로 이벤트 핸들러라고 부른다.
+		 **/
+		$('img').mouseleave(function(e) {
+			$(this).removeClass('mouseover')
+				.addClass('mouseout');
+		});
+		
+		/* hover() 메소드는 mouseentter와 mouseleave 이벤트를 동시에 등록하는 메소드로
+		 * 첫 번째 인수로 지정하는 함수는 mouseenter 이벤트를 처리할 핸들러이며 
+		 * 두 번째 인수로 지정하는 함수는 mouseleave 이벤트를 처리할 핸들러이다.
+		 *
+		 * $(selector).hover(function(event) { }, function(event) { });
+		 **/		 
+		/* $("img").hover(function(e) {
+			// 이벤트 핸들러 함수 안에서 this는 이벤트가 발생한 문서 객체를 의미한다.
+			$(this).removeClass('mouseout')
+				.addClass('mouseover');
+			
+			// 이벤트 속성에서 target은 이벤트가 발생한 문서 객체를 의미한다.
+			if($(e.target).is('#img3')) {
+				alert('세 번째 이미지로 마우스가 들어왔네요');
+			}
+		}, function() {
+			$(this).removeClass('mouseover')
+			.addClass('mouseout');
+		}); */
+		
+		// img 요소에서 더블 클릭 이벤트가 발생하면 처리할 이벤트 핸들러 등록 
+		$('img').dblclick(function(e) {
+			if($(this).is('#img2')) {
+				alert('두 번째 이미지를 더블 클릭하셨네요111' 
+					+ "\n이벤트 종류 : " + e.type + ", clientX : " + e.clientX 
+					+ "\nscreenX : " + e.screenX + ", pageX : " + e.pageX)						
+			}
+		});
+		
+		// img 요소에서 클릭 이벤트가 발생하면 처리할 이벤트 핸들러 등록
+		$('img').click(function(e) {
+			if($(this).is('img:eq(0)')) {
+				alert('첫 번째 이미지를 클릭 하셨네요' 
+					+ "\n이벤트 종류 : " + e.type + ", 눌린 버튼 : " 
+					+ (e.button == 0 ? "왼쪽 버튼" : e.button == 1 ? "휠" : "오른쪽 버튼"));
+			}
+		})
+	});
+</script>
+</head>
+<body>
+	<div id="container1">
+		<img id="img1" src="images/modern_javascript.jpg" />
+	</div>
+	<div id="container2">
+		<img id="img2" src="images/make_html5.jpg" />
+	</div>
+	<div id="container3">
+		<img id="img3" src="images/web_recipe.jpg" />
+	</div>
+</body>
+</html>

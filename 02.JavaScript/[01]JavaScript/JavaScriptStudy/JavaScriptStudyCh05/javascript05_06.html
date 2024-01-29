@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>폼에서 함수 활용하기</title>
+<script>	
+	/* 폼에서 "나이 입력" 버튼이 클릭되면 실행되는 이벤트 처리 함수
+	 *
+	 * 이 함수는 버튼이 클릭되었을 때 나이를 입력 받아서 폼 안의 나이
+	 * 입력상자에 입력해 주는 기능을 제공하는 함수이며 필요한 모든
+	 * 데이터는 함수 내부에서 처리하므로 외부에서 데이터를 받을 필요가
+	 * 없기 때문에 별도로 매개변수를 선언하지 않았다.
+	 **/
+	let inputAge = function() {		
+		
+		// prompt 창에서 나이를 입력 받는다.
+		let age = prompt("나이를 입력해주세요");	
+		form1.age.value = age;		
+	}
+
+	/* 폼에 있는 관심분야 선택 상자를 매개변수로 받아서
+	 * 현재 선택된 항목의 텍스트를 추출해 반환하는 함수 
+	 * 
+	 * 이 함수는 선택상자(select 박스)를 매개변수로 받아서 선택상자에서
+	 * 현재 선택된 텍스트를 추출해 반환하는 기능을 제공하는 함수로 선택
+	 * 상자를 매개변수로 받을 수 있도록 정의하였다.
+	 **/
+	function getSelectedValue(elem) {
+		
+		/* 매개변수로 받은 elem은 선택상자(select 요소)이며 이 요소의
+		 * selectedIndex 속성으로 현재 선택된 항목의 index 값을 알 수
+		 * 있으며 이 속성을 이용해 아래와 같이 options 속성에 현재 선택된
+		 * 항목의 index를 지정하면 value 또는 text를 읽어 올 수 있다.
+		 *
+		 * 함수는 return 문을 이용해 실행한 결과 값을 반환할 수 있다.
+		 * 만약 실행 결과를 반환할 필요가 없다면 return 문을 생략하면 된다.
+		 **/
+		return elem.options[elem.selectedIndex].text;
+	}
+		
+	/* 폼에 있는 관심분야 선택상자(select 박스)에서
+	 * 항목 선택이 변경될 때 마다 실행되는 이벤트 처리 함수
+	 * 
+	 * 이 함수는 폼의 관심분야 선택상자에서 항목 선택이 변경될 때 마다
+	 * 호출되는 함수로 선택상자를 매개변수로 받을 수 있도록 정의하였다.
+	 **/
+	function changeSelect(elem) {
+		
+		/* 매개변수로 받은 elem을 다른 함수를 호출하면서 인수로 지정 했다.
+		 * getSelectedValue() 함수의 반환 값이 없으면 undefined가 반환된다.
+		 **/
+		let val = getSelectedValue(elem) + ' 선택됨';
+		alert(val);
+	}	
+
+	/* 폼이 submit 될 때 호출되는 이벤트 처리 함수
+	 * 폼 안에서 submit 버튼이 클릭되면 폼에서 submit 이벤트가 발생하고
+	 * 폼의 onsubmit 속성에 지정한 이 함수가 호출되는데 이 때 폼 안에 있는
+	 * 폼 컨트롤에 입력된 값을 읽어와 alert() 함수를 통해 출력해 주는 함수이다. 
+	 **/
+	function registSubmit() {
+		let name = document.form1.name.value;
+		let age = document.form1.age.value;
+		let interest = form1.choice.options[form1.choice.selectedIndex].text;
+		
+		alert('입력된 정보\n' 
+				+ '이름 : ' + name + "\n" 
+				+ '나이 : '	+ age + "\n"
+				+ '관심분야 : ' + interest);
+		
+		// 폼이 submit 되는 것을 막는다.
+		return false;
+	}
+</script>
+
+<!-- jQuery를 이용하면 보다 간편하게 DOM을 제어할 수 있다. -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(function() {
+		// select 박스의 선택이 변경될 때 발생하는 이벤트를 처리하는 코드		
+		$("#choice").change(function() {
+			console.log(this   + " , " + $(this).val() + "선택됨");			
+		});
+	});
+</script>
+</head>
+<body>
+<!-- 
+	form 요소의 onsubmit 속성에 함수를 지정하면 해당 폼이 submit 될 때
+	지정한 함수가 호출된다. 다시 말해 폼에서 submit 버튼이 클릭되면 
+	submit 이벤트가 발생하는데 onsubmit 속성에 지정한 함수가 호출된다.
+-->
+<form name="form1" onsubmit="return registSubmit();">
+	이름 : <input type="text" name="name"/><br/>
+	나이 : <input type="text" name="age" readonly/>
+	<!-- 
+		아래 버튼이 클릭될 때 onclick 속성에 지정한 inputAge() 함수가 호출된다.
+	 -->
+	<input type="button" value="나이 입력" onclick="inputAge();"/><br/>
+	<!-- 
+		관심분야로 표시되는 선택 상자에서 선택된 항목이 변경될 때 마다 
+		onchange 속성에 저장한 changeSelect() 함수가 호출된다. 
+	 -->
+	관심분야 : <select name="choice" id="choice" onchange="changeSelect(this);">
+				<option>자바</option>
+				<option>JSP</option>
+				<option>자바스크립트</option>
+				<option>안드로이드</option>
+				<option>스프링</option>
+	</select><br/><br/>
+	<input type="submit" value="등록하기" />
+</form>
+</body>
+</html>

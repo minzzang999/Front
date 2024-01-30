@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 500px;
+            height: 100px;
+            margin-top: 30px;
+            overflow: auto;
+            border: 2px solid salmon;
+        }
+        .effect{
+            background-color: green;
+            color: yellow;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            const btn1 = document.querySelector("#btn1");
+            btn1.onclick = function(){
+                console.log("고전 이벤트 핸들러");
+            }
+            const btn2 = document.querySelector("#btn2");
+            btn2.addEventListener("click", btnClick);
+        }
+        function btnClick() {
+			console.log("표준 이벤트 핸들러");
+		}
+
+        function mouseOver() {
+			const result = document.getElementById("result");
+			result.classList.toggle("effect")
+			result.innerHTML += this.id + "에서 이벤트 발생<br/>";
+		}
+
+        const btn2 = document.querySelector('#btn2');
+		btn2.addEventListener("click", btnClick);
+		btn2.addEventListener("mouseover", mouseOver);
+    </script>
+    <style>
+        	div {
+		width: 500px;
+		height: 100px;
+		margin-top: 30px;		
+		overflow: auto;
+		border: 2px solid salmon;
+	}
+	.effect {
+		background-color: green;
+		color: yellow;
+	}
+    </style>
+</head>
+<body>
+    <button id="btn1">고전 이벤트</button>
+	<button id="btn2">표준 이벤트</button>
+	<button onclick="alert('인라인 이벤트 핸들러');">인라인 이벤트</button>
+	<div id="result"></div>
+</body>
+</html>

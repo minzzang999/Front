@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li {
+            padding: 5px;
+        }
+        .done {
+            opacity : 0.5;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <h2>프로그래밍 스터디 계획</h2>
+    <ul id="plan">
+        <li class="plan-list">JavaScript 함수</li>
+        <li class="plan-list">JavaScript DOM</li>
+        <li class="plan-list">JavaScript Event</li>
+        <li class="plan-list">jQuery 함수 선택자</li>
+        <li class="plan-list">jQuery Effect</li>
+        <p>ddd</p>
+    </ul>
+</div>
+<button id="btn">항목 추가</button>
+<script>
+    const plan = document.querySelector("#plan");
+    for(li of plan.children){
+        li.addEventListener("click", liClick);
+    }
+
+    const btn = document.querySelector("#btn");
+    btn.addEventListener("click", function(){
+        const li = document.createElement("li");
+        li.textContent = "오라클를 활용한 SQL 쿼리";
+
+        li.addEventListener("click", liClick);
+        plan.append(li);
+    });
+
+    function liClick(e){
+        e.target.classList.toggle("done");
+    }
+
+</script>
+</body>
+</html>

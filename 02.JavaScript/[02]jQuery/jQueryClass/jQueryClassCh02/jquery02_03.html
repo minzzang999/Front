@@ -6,6 +6,7 @@
 <style type="text/css">
 </style>
 <!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js" ></script>
 
 <script>		
 	$(function() {
@@ -28,8 +29,38 @@
 			.css('border', '1px solid red');
 	});
 	
+	function filterSearch(value){
+		$('#container img').removeAttr('style');
+
+		if(value == 'selector'){
+			$('#container img').filter('[src*=js]')
+				.css('border', '3px dotted blue')
+				.end().filter('[src*=web]')
+				.css('border', '3px dotted red');
+			
+		} else if(value == 'function'){
+			$('#container img')
+				.filter(function(index) {					
+					return $(this)
+						.attr('src') == 'images/modern_html5.jpg'
+						|| index > 5;				
+				}).css('border', '3px solid red');
+		}
+
+	}
+
+	function findSearch(value){
+		$('#result > ol').remove();
+		$('#result > div').remove();
+
+		if(value == 'img'){
+			$('#result').append('<ol id = "imgList"></ol>');
+			$('#container').find(value).each(function(index, value){
+				$('#imgList')
+					.append('<li>'+ $(this).attr('src')+'</li>');
+			})
 	
-	
+	}}
 </script>
 </head>
 <body>
@@ -82,6 +113,7 @@
 		</div>
 	</div>	
 	<div id="result"></div>
+
 </body>
 </html>
 

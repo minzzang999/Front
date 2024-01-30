@@ -6,7 +6,7 @@
 <style type="text/css">
 </style>
 <!-- 외부 자바스크립트 파일 jQuery 참조 -->
-
+<script src="js/jquery-3.3.1.min.js" ></script>
 <script>		
 	$(function() {
 		$('*').css('font-size', '12px');
@@ -60,7 +60,27 @@
 	<button class="btn" data-param="eq(3)">eq(3) - index</button><br/>
 	<button class="btn" data-param="gt(7)">gt(7) - index</button><br/>
 	<button class="btn" data-param="lt(7)">lt(7) - index</button><br/>
-	<button class="btn" data-param="nth-child(2n+1)">nth-child(2n+1)-순번</button><br/>							
+	<button class="btn" data-param="nth-child(2n+1)">nth-child(2n+1)-순번</button><br/>	
+	<script>
+		$(".btn").click(function(e){
+			// console.log(e.target.getAttribute("data-param")); 자바스크립트 형태
+			$('#result').empty();
+			let selector = $(this).attr("data-param");
+			let resultList = [];
+
+			$("#list li:" + selector).each(function(index, value){
+				resultList.push($(value).clone());
+			});
+
+			$(`<h3>함수 필터 선택자</h3><ol id= "resultList"><ol>`)
+				.appendTo('#result');
+			
+			$.each(resultList, function(index, value) {
+			$('#resultList').append('<li>' + this + '</li>');	
+			});			
+
+		});
+	</script>						
 </body>
 </html>
 

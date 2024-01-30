@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       #divArea {
+		width: 600px;
+		height: 400px;
+		border: 1px solid #9999FF;
+	} 
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded',function() {
+            const divArea = document.querySelector("#divArea");
+		    divArea.addEventListener("mousedown", mouseDown);
+        });
+
+        function mouseDown(e){ // 이벤트에 담긴 객체를 넣어준다
+            const eventInfo = document.querySelector("#eventInfo");
+            let result = [];
+
+            result.push('이벤트 발생객체 this : ' + this.id);		
+            result.push('이벤트 발생객체 target : ' + e.target.id);		
+            result.push('이벤트 타입 : ' + e.type);
+            result.push('눌린 버튼 : ' + getButtonType(e));
+            result.push('뷰포트에서 X 좌표 : ' + e.clientX);
+            result.push('뷰포트에서 Y 좌표 : ' + e.clientY);
+            result.push('#divArea에서 X 좌표 : ' + e.offsetX);
+            result.push('#divArea에서 Y 좌표 : ' + e.offsetY);
+            result.push('altKey : ' + e.altKey);
+            result.push('ctrlKey : ' + e.ctrlKey);
+            result.push('shiftKey : ' + e.shiftKey);
+            result.push('metaKey : ' + e.metaKey);
+
+            eventInfo.innerHTML = '<h3>이벤트 발생 정보</h3>';
+		    eventInfo.innerHTML += result.join('<br/>'); // 배열을 합치면서 br로 줄바꿈을 위해
+       }
+     
+       function getButtonType(e) {
+		switch(e.button) {
+			case 0 : return 'left';
+			case 1 : return 'center';
+			case 2 : return 'right';
+		}	
+	}
+    </script>
+</head>
+<body>
+    <div id="divArea"></div>
+	<div id="eventInfo"></div>	
+</body>
+</html>

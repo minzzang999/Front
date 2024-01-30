@@ -4,7 +4,23 @@
 <meta charset="UTF-8">
 <title>html()메서드와 text() 메소드</title>
 <!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(function(){
+		let result1 = $('p').text();
+		let result2 = $('p').html();
+		// document.querySelector('#result').style.marginTop//이것은 바닐라방식
+		$("#result1").text(result1).css("margin", "15px")
+								.css("border","1px solid red")
+								.css("width", "500px");
 
+		$("#result2").html(result2).css({"margin": "15px", 
+										"border": "1px solid red", 
+										"padding":"15px", 
+										"width":"500px"
+										});// select를 하던가 해야하지만 이것이 끝
+		});
+</script>
 </head>
 <body>
 	<div id="content">

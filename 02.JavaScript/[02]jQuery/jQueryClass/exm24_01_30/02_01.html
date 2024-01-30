@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.min.js" ></script>
+</head>
+<body>
+    <ul id="fruitList">
+        <li>사과 : 500원</li>
+        <li>배 : 700원</li>
+        <li>바나나 : 300원</li>
+        <li>한라봉 : 800원</li>
+        <li>귤 : 400원</li>
+    </ul>
+    <div id="nameOrder">
+    </div>
+    <div id="result">
+    </div>
+    <div id="buttons">
+        <button id="btnNameOrder">이름순으로 정렬하여 출력하기</button><br/>
+        <button id="btnOddList">index가 홀수 번째만 가져오기</button>
+        <button id="btnEvenList">index가 짝수 번째만 가져오기</button><br/>
+        <button id="btnFirstList">첫 번째만 가져오기</button>
+        <button id="btnLastList">마지막 번째만 가져오기</button><br/>
+    </div>
+    <script>
+        $('*').css('font-size', '12px');
+        $('#nameOrder').css('width', '300px')
+            .css('height', '150px')
+            .css('padding', '10px 20px')
+            .css('margin', '10px 0px')
+            .css('border', '1px dotted blue')
+
+        $('#result').css('width', '300px')
+            .css('height', '150px')
+            .css('padding', '10px 20px')
+            .css('margin', '10px 0px')
+            .css('border', '1px dotted red');
+
+        $('#buttons').css('margin', '30px 0px');
+
+        $("btnNameOrder").click(function (){
+            let fruitList = [];
+
+            $('fruitList').children().each(function (i, v){
+                fruitList.push($(v).text());
+            });
+
+            fruitList.sort();
+
+            $('nameOrder').empty();
+
+            $('<h4>과일 이름순 정렬</h4><lo id="fruitName"></lo>')
+                .appendTo('nameOrder');
+
+            $.each(fruitList, function (i,v){
+                $('#fruitName').append('<li>' + this + '</li>');
+            });
+
+            $("#btnOddList").click(oddList);
+            $("#btnEvenList").click(evenList);
+            $("#btnFirstList").click(firstList);
+            $("#btnLastList").click(lastList);
+        });
+
+        function oddList() {
+            let result = [];
+            $('#result').empty();
+
+            $('#fruitList > li:odd').each(function (i, v){
+                result.push($(this).text());
+            });
+            $('#nameOrder li:odd').each(function (i, v){
+                result.push($(this).text());
+            })
+        }
+    </script>
+</body>
+</html>

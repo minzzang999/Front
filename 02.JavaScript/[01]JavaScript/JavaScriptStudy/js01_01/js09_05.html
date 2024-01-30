@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mouseover{
+            border: 2px dotted blue;
+            opacity: 0.5;
+        }
+        .mouseout {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container1">
+		<img id="img1" src="images/modern_javascript.jpg" />
+	</div>
+	<div id="container2">
+		<img id="img2" src="images/make_html5.jpg" />
+	</div>
+	<div id="container3">
+		<img id="img3" src="images/web_recipe.jpg" />
+	</div>
+	<div id="container4">
+		<button id="btn">두 번째 이미지 더블 클릭 발생시키기</button>
+	</div>
+    <script>
+        const imgs = document.querySelectorAll("img");
+
+        for(let img of imgs) {
+			img.addEventListener("mouseover", mouseOver);
+            img.addEventListener("mouseout", mouseOut);
+            img.addEventListener("dblclick", dblClick);
+            img.addEventListener("mouseenter", mouseEnter);
+			img.addEventListener("mouseleave", mouseLeave);
+			img.addEventListener("contextmenu", mouseConetxtMenu);
+		}
+
+        const btn = document.querySelector("#btn");
+		btn.addEventListener("click", function(e) {
+			const img2 = document.querySelector("#img2");
+
+			// 마우스 더블 클릭 이벤트 강제로 발생시키기
+			img2.dispatchEvent(new Event("dblclick"));
+		});	
+
+        function mouseOver(e) {
+		e.target.classList.add('mouseover');
+        e.target.classList.remove('mouseout');
+    	}
+
+        function mouseOut(e) {
+		e.target.classList.remove('mouseover');
+		e.target.classList.add('mouseout');
+	    }
+
+        function dblClick(e) {
+		if(e.target.id == "img2")	{
+			alert("2번째 이미지를 더블클릭...")
+		}
+	    }
+        function mouseEnter(e) {
+		if(e.target.id == "img3") {
+			console.log("3번째 이미지로 mouseenter")
+		}
+	}
+	function mouseLeave(e) {
+		if(e.target.id == "img1") {
+			e.target.style.border = "2px solid red";
+		}
+	}
+	function mouseConetxtMenu(e) {
+		if(e.target.id == "img1") {
+			e.preventDefault();
+		}
+	}
+    </script>
+</body>
+</html>

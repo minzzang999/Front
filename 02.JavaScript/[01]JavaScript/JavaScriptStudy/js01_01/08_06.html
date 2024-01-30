@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content{
+            width: 400px;
+        }
+        li.done{
+            text-decoration: line-through; 
+            background-color: #eaeaea;
+        }
+        li.done::after{
+            content : "- 1차 완료";
+            color: red;
+        }
+        li.studying{
+            background-color: #ffeaea;
+        }
+        li.studying::after{
+            content : "-진행중";
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+		<div class="header">
+			<h1>DOM Tree</h1>
+		</div>		
+		<div class="content">
+			<!-- 앞으로 스터디 할 목록 -->
+			<h2>프로그래밍 스터디 계획</h2>
+			<ul id="plan">
+				<li class="plan-list">JavaScript 함수</li>
+				<li class="plan-list">JavaScript DOM</li>
+				<li class="plan-list">JavaScript Event</li>
+				<li class="plan-list done">jQuery 함수 선택자</li>					
+				<li class="plan-list">jQuery Effect</li>
+			</ul>
+		</div>
+		<div class="content">
+			<!-- 완료된 스터디 목록 -->
+			<h2>프로그래밍 스터디 완료</h2>
+			<ul id="done">
+				<li class="done-list">HTML 기본 태그</li>
+				<li class="done-list">HTML5 시멘틱 태그</li>
+				<li class="done-list">CSS3 선택자</li>
+				<li class="done-list">CSS3 박스모델</li>
+				<li class="done-list">JavaScript 제어문</li>
+			</ul>
+		</div>
+	</div>		
+    <script>
+		const plan = document.querySelector("#plan");
+        // plan.children[0].classList.toggle("done");
+        // plan.children[0].style.textDecoration = "line-through";// 카멜케이션?
+        // plan.children[0].className = "done"; // 기존의 클래스를 건들지 말아야 한다.
+        plan.children[0].classList.add("done");
+        plan.children[0].classList.replace("done", "studying");
+        plan.children[0].classList.add("test", "test2"); // class를 추가할 수 있다.
+        plan.children[0].classList.remove("test", "test2");
+        // add, remove, replace(치환) 를 활용
+        plan.children[0].classList.toggle("done"); /*체크하고 해제*/
+        plan.children[3].classList.toggle("done"); /*체크하고 해제*/
+	</script>
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.addEventListener('DOMContentLoaded', function (){
+            console.log("DOM 로드 완료");
+
+            // divArea 요소를 선택하고 mousedown 이벤트 리스너를 등록
+            const divArea = document.querySelector("#divArea");
+            divArea.addEventListener("mousedown", mouseDown);
+        });
+
+        function mouseDown(e){
+            const eventInfo = document.querySelector('#eventInfo');
+            var result = [];
+
+            result.push('이벤트 발생객체 this : ' + this.id);
+            result.push('이벤트 발생객체 target : ' + e.target.id);
+            result.push('이벤트 타입 : ' + e.type);
+            result.push('눌린 버튼 : ' + getButtonType(e));
+            result.push('뷰포트에서 X 좌표 : ' + e.clientX);
+            result.push('뷰포트에서 Y 좌표 : ' + e.clientY);
+            result.push('#divArea에서 X 좌표 : ' + e.offsetX);
+            result.push('#divArea에서 Y 좌표 : ' + e.offsetY);
+            result.push('altKey : ' + e.altKey);
+            result.push('ctrlKey : ' + e.ctrlKey);
+            result.push('shiftKey : ' + e.shiftKey);
+            result.push('metaKey : ' + e.metaKey);
+
+            eventInfo.innerHTML = '<h3>이벤트 발생 정보</h3>';
+            eventInfo.innerHTML += result.join('<br/>');
+        }
+
+        function getButtonType(e){
+            switch(e.button){
+                case 0 : return "left";
+                case 1 : return "left";
+                case 2 : return "left";
+            }
+        }
+    </script>
+    <style>
+        #divArea {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #9999FF;
+        }
+    </style>
+</head>
+<body>
+    <div id="divArea"></div>
+    <div id="eventInfo"></div>
+</body>
+</html>

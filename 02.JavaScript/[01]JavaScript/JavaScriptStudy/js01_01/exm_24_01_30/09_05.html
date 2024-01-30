@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="container1">
+        <img id="img1" src="images/modern_javascript.jpg" />
+    </div>
+    <div id="container2">
+        <img id="img2" src="images/make_html5.jpg" />
+    </div>
+    <div id="container3">
+        <img id="img3" src="images/web_recipe.jpg" />
+    </div>
+    <div id="container4">
+        <button id="btn">두 번째 이미지 더블 클릭 발생시키기</button>
+    </div>
+<script>
+    const imgs = document.querySelectorAll("img");
+
+    for(let img of imgs) {
+        img.addEventListener("mouseover", mouseOver);
+        img.addEventListener("mouseout", mouseOut);
+        img.addEventListener("dblclick", dblClick);
+        img.addEventListener("mouseenter", mouseEnter);
+        img.addEventListener("mouseleave", mouseLeave);
+        img.addEventListener("contextmenu", mouseConetxtMenu);
+    }
+
+    const btn = document.querySelector()
+</script>
+</body>
+</html>

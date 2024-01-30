@@ -1,89 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>이벤트 위임</title>
-<script>
-	/* 이벤트 위임(Event Delegate)
-	 * 이벤트가 발생한 요소에서 직접 처리하지 않고 이벤트 버블링을 활용해 상위
-	 * 요소에서 이벤트를 다루는 방식을 이벤트 위임(Event Delegation)이라고 한다.
-	 **/
-	window.addEventListener('DOMContentLoaded', function() {
-		console.log("DOM 로드 완료");
+	<meta charset="UTF-8">
+	<title>이벤트 위임</title>
+	<script>
+		/* 이벤트 위임(Event Delegate)
+         * 이벤트가 발생한 요소에서 직접 처리하지 않고 이벤트 버블링을 활용해 상위
+         * 요소에서 이벤트를 다루는 방식을 이벤트 위임(Event Delegation)이라고 한다.
+         **/
+		window.addEventListener('DOMContentLoaded', function() {
+			console.log("DOM 로드 완료");
 
-		// 이벤트 위임 전에 li 요소에 이벤트 리스너를 등록하는 코드
-		const plan = document.querySelector("#plan");
-		for(li of plan.children) {
-			li.addEventListener("click", liClick);
-		}
-		
-		// "항목 추가" 버튼이 클릭되면 스터디 항목을 추가하는 이벤트 리스너 등록
-		const btn = document.querySelector("#btn");
-		btn.addEventListener("click", function() {
-			const li = document.createElement("li");
-			li.textContent = "오라클를 활용한 SQL 쿼리";			
+			// 이벤트 위임 전에 li 요소에 이벤트 리스너를 등록하는 코드
+			const plan = document.querySelector("#plan");
+			for(li of plan.children) {
+				li.addEventListener("click", liClick);
+			}
 
-			/* 동적으로 새로 추가한 li 요소는 앞에서 li 요소에 지정한 click 이벤트
-			 * 리스너가 적용되지 않기 때문에 별도로 이벤트 리스너를 등록해야 한다.
-			 **/
-			//li.addEventListener("click", liClick);
-			plan.append(li);			
+			// "항목 추가" 버튼이 클릭되면 스터디 항목을 추가하는 이벤트 리스너 등록
+			const btn = document.querySelector("#btn");
+			btn.addEventListener("click", function() {
+				const p = document.createElement("p")
+				p.classList.add("plan-list");
+				p.textContent = "오라클를 활용한 SQL 쿼리";
+
+				/* 동적으로 새로 추가한 li 요소는 앞에서 li 요소에 지정한 click 이벤트
+                 * 리스너가 적용되지 않기 때문에 별도로 이벤트 리스너를 등록해야 한다.
+                 **/
+				p.addEventListener("click", liClick);
+				plan.append(p);
+			});
+
+
+
+			/* li 요소의 상위 요소인 ul(id='plan') 요소에 click 이벤트 리스너를 등록하고
+             * li 요소에서 click 이벤트가 발생하게 되면 이벤트 버블링 단계에서 상위 요소인
+             * ul 요소로 이벤트가 전파되어 아래에 등록한 click 이벤트 리스너가 실행된다.
+             * 이 때 이벤트 리스너 안에서 이벤트 객체의 target 속성을 사용해 실제 이벤트가
+             * 발생한 요소의 클래스를 토글 시키고 있으므로 실제 이벤트가 발생한 객체인
+             * li 요소에 done 클래스가 추가되거나 삭제되어 스타일이 적용되거나 해제된다.
+             * 이렇게 자식 요소에서 발생한 이벤트를 이벤트 버블링을 활용해 부모 요소에서
+             * 다루는 방식을 이벤트 위임(Event Delegation)이라고 한다. 이벤트 위임을 활용해
+             * 동적으로 새롭게 추가되는 하위 요소에 별도로 이벤트 리스너를 등록하지 않아도
+             * 기존의 이벤트 리스너를 활용해 새로운 요소의 이벤트를 처리할 수 있다.
+             **/
+			// plan.addEventListener("click", liClick);
 		});
 
-		/* li 요소의 상위 요소인 ul(id='plan') 요소에 click 이벤트 리스너를 등록하고
-		 * li 요소에서 click 이벤트가 발생하게 되면 이벤트 버블링 단계에서 상위 요소인
-		 * ul 요소로 이벤트가 전파되어 아래에 등록한 click 이벤트 리스너가 실행된다.
-		 * 이 때 이벤트 리스너 안에서 이벤트 객체의 target 속성을 사용해 실제 이벤트가
-		 * 발생한 요소의 클래스를 토글 시키고 있으므로 실제 이벤트가 발생한 객체인
-		 * li 요소에 done 클래스가 추가되거나 삭제되어 스타일이 적용되거나 해제된다.
-		 * 이렇게 자식 요소에서 발생한 이벤트를 이벤트 버블링을 활용해 부모 요소에서
-		 * 다루는 방식을 이벤트 위임(Event Delegation)이라고 한다. 이벤트 위임을 활용해
-		 * 동적으로 새롭게 추가되는 하위 요소에 별도로 이벤트 리스너를 등록하지 않아도
-		 * 기존의 이벤트 리스너를 활용해 새로운 요소의 이벤트를 처리할 수 있다.
-		 **/
-		//plan.addEventListener("click", liClick);
-	});
+		// 이벤트 위임 전에 항목이 클릭되면 class='done'를 토글하는 함수
+		function liClick(e) {
+			if (e.target.classList.contains("plan-list")) {
+				e.target.classList.toggle("done");
+			}
+		}
 
-	// 이벤트 위임 전에 항목이 클릭되면 class='done'를 토글하는 함수	
-	function liClick(e) {		
-		e.target.classList.toggle("done");
-	}
-	
-	/* 이벤트 위임에서 항목이 클릭되면 class='done'를 토글하는 함수
-	 * 이벤트 위임으로 li 요소의 상위 요소인 ul 요소에 이벤트 리스너를 등록했기
-	 * 때문에 ul 요소를 클릭해도 스타일이 적용되거나 해제되기 때문에 명확하게
-	 * li 요소만 스타일을 적용하기 위해서 li 요소가 가지는 plan-list 클래스를
-	 * 가지고 있는지 체크해서 있으면 done 클래스를 토글 되도록 해야 한다.
-	 **/
-	/*
-	function liClick(e) {
-		if(e.target.classList.contains("plan-list")) {
-			e.target.classList.toggle("done");
-		}			
-	}	
-	*/
-</script>
-<style>
-	li {
-		padding: 5px;
-	}
-	.done {
-		opacity : 0.5;
-		text-decoration: line-through;
-	}
-</style>
+		/* 이벤트 위임에서 항목이 클릭되면 class='done'를 토글하는 함수
+         * 이벤트 위임으로 li 요소의 상위 요소인 ul 요소에 이벤트 리스너를 등록했기
+         * 때문에 ul 요소를 클릭해도 스타일이 적용되거나 해제되기 때문에 명확하게
+         * li 요소만 스타일을 적용하기 위해서 li 요소가 가지는 plan-list 클래스를
+         * 가지고 있는지 체크해서 있으면 done 클래스를 토글 되도록 해야 한다.
+         **/
+		/*
+        function liClick(e) {
+            if(e.target.classList.contains("plan-list")) {
+                e.target.classList.toggle("done");
+            }
+        }
+        */
+	</script>
+	<style>
+		li {
+			padding: 5px;
+		}
+		.done {
+			opacity : 0.5;
+			text-decoration: line-through;
+		}
+	</style>
 </head>
 <body>
-	<div id="container">
-		<h2>프로그래밍 스터디 계획</h2>
-		<ul id="plan">
-			<li class="plan-list">JavaScript 함수</li>
-			<li class="plan-list">JavaScript DOM</li>
-			<li class="plan-list">JavaScript Event</li>
-			<li class="plan-list">jQuery 함수 선택자</li>					
-			<li class="plan-list">jQuery Effect</li>
-		</ul>
-	</div>
-	<button id="btn">항목 추가</button>
+<div id="container">
+	<h2>프로그래밍 스터디 계획</h2>
+	<ul id="plan">
+		<li class="plan-list">JavaScript 함수</li>
+		<li class="plan-list">JavaScript DOM</li>
+		<li class="plan-list">JavaScript Event</li>
+		<li class="plan-list">jQuery 함수 선택자</li>
+		<li class="plan-list">jQuery Effect</li>
+	</ul>
+</div>
+<button id="btn">항목 추가</button>
 </body>
 </html>

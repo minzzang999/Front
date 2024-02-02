@@ -14,7 +14,47 @@
 </style>
 
 <!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(function (){
+		$('img').on('mouseenter', function (e) {
+			console.log(e.target); // target는 실제로 발생한 이벤트, current 는 이전
+			$(this).addClass('mouseover') // 화살표 함수를 쓸 경우 this의 형태가 달라질수 있음
+					.removeClass('mouseout');
+		});
+		$('img').on('mouseleave', function (e) { // on은 통합지원 이벤트
+			$(this).addClass('mouseout')
+					.removeClass('mouseover');
+		});
 
+		$('img').on("click", function (e){
+			alert($(this).parent().attr("id"));
+		});
+
+		$("img").on({
+			dblclick: function(e){
+				if($(this).is('#img2')){
+					alert('두 번째 이미지를 더블 클릭 하셧군요');
+				}
+			}, mouseenter : function (e){
+				if($(e.target).is('#img3')){
+					console.log('세 번째 이미지로 마우스가 들어왔네요');
+				}
+			},
+			mouseleave : function(e) {
+				if($(this).is('#img1')){
+					$(this).css('border', '2px solid red');
+				}
+			}
+		});
+		$("#btn").on("click", function (){
+			// $("#img2").dblclick();
+			$("#img2").trigger("dblclick"); //발생시키는 내장함수 trigger
+		});
+
+
+	}); // endpoint
+</script>
 </head>
 <body>
 	<div id="container1">

@@ -1,0 +1,76 @@
+데이터 조회하기 과제 풀이
+
+아래 요구사항에 맞게 EMP 테이블에서 데이터를 조회하시오
+
+
+01. 부서번호가 10번인 사원의 이름, 성별, 직급, 생일, 부서번호를 조회하시오
+SELECT ename 이름, gender 성별, job 직급, birthday 생일, deptno 부서번호 FROM emp
+WHERE deptno = 10;
+
+
+02. 급여가 400만원 이상인 사원의 이름, 성별, 입사일, 급여, 부서번호 조회
+SELECT ename 이름, gender 성별, hiredate 입사일, sal 급여 FROM emp
+WHERE sal >= 400;
+
+
+03. empno, ename, birthday, sal, deptno 컬럼을 각각 사번, 이름, 생일, 급여, 부서번호로 
+별칭을 지정해 조회하시오. 단, 10번 부서에 소속된 사원은 제외하고 조회하시오
+SELECT empno 사번, ename 이름, birthday 생일, sal 급여, deptno 부서번호 FROM emp
+WHERE deptno <> 10;
+
+
+04. 급여가 300미만이면서 입사일이 2010년 이전에 입사한 사원의 사번, 이름, 직책, 입사일, 급여, 부서번호 조회
+SELECT empno 사번, ename 이름, job 직책, hiredate 입사일, sal 급여, deptno 부서번호 FROM emp
+WHERE sal < 300
+    AND hiredate <= '2010-01-01';
+
+
+05.부서가 20, 40이면서 입사일이 2005년 ~ 2010에 입사한 사원의 사번, 이름, 급여, 입사일 부서번호 조회
+SELECT empno 사번, ename 이름, sal 급여, hiredate 입사일, deptno 부서번호 FROM emp
+WHERE deptno IN(20, 40)
+    AND hiredate BETWEEN '2005-01-01' AND '2010-12-31';
+
+
+06. 입사일이 2008년 이전인 사원중에 인사부, 영업부 소속의 사원의 리스트
+단, 입사일이 최근이 사원부터 출력
+SELECT * FROM emp 
+WHERE hiredate < '08-01-01' AND deptno IN(20, 30)
+ORDER BY hiredate DESC;
+
+
+07. 직급이 사원과 대리인 여사원을 출력
+단 입사일이 빠른 순으로 정렬
+SELECT * FROM emp
+WHERE job IN('사원', '대리') AND gender = 'F'
+ORDER BY hiredate;
+
+
+08. 영업부 소속 사원 중에서 급여가 400만원 이상인 사원의 리스트
+단, 급여를 많이 받는 사원 부터 출력
+SELECT * FROM emp
+WHERE deptno = 30 AND sal >= 400
+ORDER BY sal DESC;
+
+
+09. 영업부 소속이 아니고 입사일이 2008년 이전과 2010년 이후에 입사한 사원중에서
+400 이하의 급여를 받는 사원의 리스트, 단, 급여를 적게 받는 사원 순으로 출력
+SELECT * FROM emp
+WHERE deptno NOT IN(30) 
+  AND (hiredate < '2008-01-01' OR hiredate > '2010-01-01')
+  AND sal <= 400
+  ORDER BY sal;
+
+
+10. 부서가 경리부, 전산부가 아니고 생일이 80년 1월 1일 이후에 태어난 사원중에서
+직급이 과장 이상인 사원의 리스트를 출력 단, 나이가 적은 순으로 출력
+SELECT * FROM emp
+WHERE deptno NOT IN(10, 40)
+  AND birthday >= '1980-01-01'
+  AND job IN('과장', '차장', '부장')
+  ORDER BY birthday DESC;
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+집계함수 과제 풀이
+
+
+1. professor 테이블에서 가장 오래된 교수의 입사일과 가장 최근에 입사한 교수의 입사일을 조회하시오.
+SELECT Max(hiredate), Min(hiredate) FROM professor;
+
+
+
+2. professor 테이블에서 전임강사의 급여 평균과 보너스 평균을 조회하시오.
+SELECT AVG(pay) "급여 평균", NVL(AVG(bonus), 0) "보너스 평균"FROM professor
+WHERE position = '전임강사';
+
+
+
+3. emp 테이블에서 부서별 여직원의 수를 조회하시오.
+SELECT deptno 부서번호, COUNT(gender) || '명' "여직원 수" FROM emp
+WHERE gender = 'F'
+GROUP BY deptno;
+
+
+
+4. emp 테이블에서 부서별 직책별 직원의 급여 합계와 급여 평균을 조회하시오.
+  숫자는 잘 정돈되게 세자리마다 콤마(,)를 찍어 출력하시오.
+SELECT deptno 부서번호, job 직책, 
+  TO_CHAR(SUM(sal), '999,999') "직책별 급여합계",
+  TO_CHAR(ROUND(AVG(sal)), '999,999') "직책별 급여평균"
+FROM emp
+GROUP BY deptno, job
+ORDER BY deptno;
+
+
+
+5. 위의 쿼리는 부서별 정렬은 잘되나 부서에서 직책별 정렬이 한글로 되어있어
+  가나다 순으로 정렬된다. 이것을 사원, 대리, ~ 부장, 사장 형태로 정렬되도록 하시오
+SELECT deptno 부서번호, job 직책, 
+  TO_CHAR(SUM(sal), '999,999') "직책별 급여합계",
+  TO_CHAR(ROUND(AVG(sal)), '999,999') "직책별 급여평균"
+FROM emp
+GROUP BY deptno, job
+ORDER BY deptno, 
+  DECODE(job, '사원', 1, '대리', 2, '과장', 3, '차장', 4, '부장', 5, '사장', 6);
+
+
+
+
+SELECT deptno 부서번호, job 직책, 
+  TO_CHAR(SUM(sal), '999,999') "직책별 급여합계",
+  TO_CHAR(ROUND(AVG(sal)), '999,999') "직책별 급여평균"
+FROM emp
+GROUP BY deptno, job
+ORDER BY deptno, 
+  CASE WHEN job='사원' THEN 1
+    WHEN job='대리' THEN 2
+    WHEN job='과장' THEN 3
+    WHEN job='차장' THEN 4
+    WHEN job='부장' THEN 5
+    WHEN job='사장' THEN 6
+    ELSE 0
+  END; 
+
+
+
+
+6. 급여 합계가 2000이 넘는 부서의 부서번호, 부서명, 인원, 급여 합계, 급여 평균을 조회하고
+  부서번호로 오름차순 정렬하시오.
+SELECT deptno, 
+  DECODE(deptno, 10, '경리부', 20, '인사부', 30, '영업부', 40, '전산부') 부서명,
+  COUNT(*) 인원, SUM(sal) "급여 합계", ROUND(SUM(sal)) "급여 평균"
+FROM emp
+GROUP BY deptno
+HAVING SUM(sal) > 2000
+ORDER BY deptno;
+
+
+
+
+
+

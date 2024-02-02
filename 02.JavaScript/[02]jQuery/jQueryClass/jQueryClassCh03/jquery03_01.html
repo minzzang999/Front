@@ -14,7 +14,47 @@
 </style>
 
 <!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(() => {
+		$('img').mouseenter( function (e){
+			// e.target == this 와 동일
+			$(this).removeClass('mouseout') //마우스오버아웃되는 대상이 this
+					.addClass('mouseover');
+			if($(e.target).is('#img3')){ // 선택자를 지정하여 bool타입으로 출력
+				alert("세번째 이미지로 마우스가 올라와용");
+			}
+		});
 
+		$('img').mouseleave(function (e){
+			$(this).removeClass("mouseover")
+					.addClass('mouseout');
+		});
+
+		$('img').dblclick(function (e){
+			if($(this).is('#img2')){
+				alert(`두번째 이미지를 더블 클릭 하셧구만!
+				이벤트 종류 : ${e.type}, "clientX : ${e.clientX}
+				screenX : ${e.screenX}`
+				)
+			}
+		});
+		$('img').click(function (){
+			if($(this).is("img:eq(0)")){ // 해당요소를 0부터 시작하여 찾음
+				alert('첫번째 이미지를 더블 클릭 했자누?' + e.type + "\n"
+					+ (e.button == 0 ? "왼쪽 버튼" : e.button == 1 ? "휠" : "오른쪽 버튼"));
+				// if 문으로 했을 때
+				// 	if(e.button == 0){
+				// 		"왼쪽버튼"
+				// 	}else if(e.button == 1){
+				// 		"휠"
+				// 	}else{
+				// 		"오른쪽 버튼"
+				// 	}
+			}
+		})
+	});
+</script>
 </head>
 <body>
 	<div id="container1">

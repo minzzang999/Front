@@ -13,7 +13,30 @@
 	}
 </style>
 <!-- 외부 자바스크립트 파일 jQuery 참조 -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(function (){
+		$('#img1').on("click", function (e){
+			// $(this).parent().clone().appendTo("body")
+			$("body").append($(this).parent().clone());
+			console.log(e.which + "," + e.button);
+			$(this).off("click"); // on이벤트를 제거
+		});
 
+		$('#img2').one("click", function (e){
+			$(this).parent().clone().appendTo('body');
+			console.log(this);
+		}); // 여기까지 작성해서는 두번째 이벤트가 실행되지 않는다
+
+		$('#img2').on('mouseenter', function (e){
+			$(this).parent().prev().clone().appendTo('body');
+		}); // 이것은 추가가 되는데 왜 1번이 되는걸까 this가 1인가?
+
+		$(document).on('mouseenter','#img3', function (e){
+			$(this).parent().clone().appendTo('body');
+		})
+	});
+</script>
 </head>
 <body>
 	<div id="container1">

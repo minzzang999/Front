@@ -1,0 +1,135 @@
+서브쿼리 과제 풀이
+
+
+01. employees, jobs 테이블에서 평균 급여보다 적게 급여를 받는 사원의
+이름, 직급, 급여를 출력 하시오
+
+SELECT e.first_name 이름, j.job_title, e.salary
+FROM employees e, jobs j
+WHERE e.job_id = j.job_id
+  AND e.salary < (SELECT ROUND(AVG(salary)) FROM employees);
+
+
+
+02. employees, departments, jobs 테이블을 조인하고
+최저 급여 부터 평균 급여를 받는 사원의 이름, 급여, 부서명, 직급을 출력 하시오
+
+SELECT e.first_name, e.salary, d.department_name, j.job_title
+FROM employees e, departments d, jobs j
+WHERE e.department_id = d.department_id
+  AND e.job_id = j.job_id
+  AND e.salary BETWEEN (SELECT MIN(salary) FROM employees) 
+        AND (SELECT AVG(salary) FROM employees)
+ORDER BY salary;
+
+
+
+
+03. PROFESSOR, DEPARTMENT 테이블에서 바비 교수보다 입사일이 빠른 교수 중에서  
+김도형 교수보다 급여가 많은 교수의 이름, 급여, 입사일, 학과명을 출력 하시오
+
+SELECT p.name 교수명, p.pay 급여, p.hiredate 입사일, d.dname 학과명
+FROM professor p, department d
+WHERE p.deptno = d.deptno
+  AND p.hiredate < (SELECT hiredate FROM professor WHERE name='바비')
+  AND p.pay > (SELECT pay FROM professor WHERE name='김도형');
+
+
+
+04. EMP, DEPT 테이블에서 감우성 차장에게 보고하는 사원들의 사번, 이름, 직급, 
+급여, 입사일, 부서명 출력, 단 가장 오래 근무한 사원부터 출력되게 하시오.
+
+SELECT e.empno 사번, e.ename 이름, e.job 직급, e.sal 급여, d.dname 부서명 
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+  AND e.mgr IN (SELECT empno FROM emp WHERE ename='감우성');
+
+
+
+
+05. EMP2, DEPT2 테이블에서 과장 직급의 최소급여보다 같거나 적게 받는 사원의 이름, 급여 직급과
+부서명을 출력 하시오 
+단, 숫자는 3자리마다 콤마로 표시하고 급여를 적게 받는 사원부터 출력하시오.
+
+SELECT e.name 이름, TO_CHAR(e.pay, '999,999,999') 급여, e.position 직급, d.dname 부서명 
+FROM emp2 e, dept2 d
+WHERE e.deptno = d.dcode
+  AND e.pay <= ALL (SELECT pay FROM emp2 WHERE position = '과장')
+ORDER BY e.pay;
+
+
+
+06. PROFESSOR, DEPARTMENT 테이블에서 학과별로 입사일이 가장 빠른 교수의 학과명, 이름, 입사일, 
+급여를 출력 하시오. 단, 학과번호로 오름차순 정렬하여 출력 하시오
+
+SELECT d.deptno, d.dname 학과명, p.name 이름, p.hiredate 입사일, p.pay 급여
+FROM professor p, department d
+WHERE p.deptno = d.deptno
+  AND (p.deptno, p.hiredate) IN(
+    SELECT deptno, MIN(hiredate) FROM professor GROUP BY deptno)
+ORDER BY d.deptno;
+
+
+
+07. emp, dept 테이블에서 자신의 직급 평균 급여보다 급여가 적은 사원의 이름, 부서명, 직급,
+급여를 출력하시오.
+
+SELECT e.ename 이름, d.dname 부서명, e.job, e.sal 급여
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+  AND e.sal < (SELECT AVG(es.sal) FROM emp es WHERE e.job = es.job)
+ORDER BY e.deptno;
+
+
+
+08. PROFESSOR, DEPARTMENT 테이블에서 평균 급여보다 급여가 많은 교수의 이름, 급여, 부서명 출력 하시오
+단, 부서명은 조인이 아닌 스칼라 서브 쿼리를 이용해 조회하고 급여가 많은 교수부터 출력하시오.
+
+SELECT p.name 이름, p.pay 급여, 
+  (SELECT dname FROM department d WHERE p.deptno = d.deptno) 부서명
+FROM professor p
+WHERE p.pay > (SELECT AVG(pay) FROM professor)
+ORDER BY p.pay DESC;
+
+
+
+09. STUDENT, DEPARTMENT 테이블에서 학과번호, 학과명, 학과 별 최저 몸무게, 평균 몸무게, 최고 몸무게를 출력 하시오
+SELECT d.deptno 학과번호, d.dname 학과명, s.min_weight "최저 몸무게", 
+  s.avg_weight "평균 몸무게", s.max_weight "최고 몸무게"
+FROM department d, 
+  (SELECT deptno1, MIN(weight) min_weight, 
+    ROUND(AVG(weight)) avg_weight, MAX(weight) max_weight
+    FROM student GROUP BY deptno1) s
+WHERE d.deptno = s.deptno1;    
+
+
+
+10. STUDENT, DEPARTMENT 테이블에서 학생의 학번, 이름, 나이, 학과명을 출력하시오.
+단, 나이순으로 오름차순 정렬하고 한 페이지에 5명씩 출력되게 하여 2 페이지에 해당하는 데이터를 출력하시오.
+
+SELECT no, s.studno 학번, s.name 이름, ROUND((SYSDATE - birthday) / 365) 나이, d.dname 학과명 
+  FROM 
+    (SELECT ROWNUM no, studno, name, birthday, deptno1 
+      FROM (SELECT * FROM student ORDER BY birthday DESC)) s, 
+    department d
+WHERE s.deptno1 = d.deptno
+  AND no >= 6 AND no <= 10
+--  AND no BETWEEN  6  AND 10
+ORDER BY no;
+
+
+
+11. orders, customers 테이블에서 년도별 고객의 주문금액 주문년도, 고객아이디, 고객이름을 출력하시오.
+단, 년도로 오른차순, 주문금액으로 내림차순 정렬하고 한 페이지에 10명씩 출력되게 하여 3페이지에 해당하는 페이지를 출력하시오.
+
+SELECT * 
+  FROM 
+  (SELECT ROWNUM num, order_year, customer_id, customer_name, sum
+    FROM 
+      (SELECT TO_CHAR(order_date, 'YYYY') order_year, o.customer_id, customer_name, SUM(order_amount) sum 
+        FROM orders o, customers c
+      WHERE o.customer_id = c.customer_id
+      GROUP BY TO_CHAR(order_date, 'YYYY'), o.customer_id, customer_name
+      ORDER BY order_year ASC, sum DESC))
+WHERE num >= 21 AND num <= 30;
+

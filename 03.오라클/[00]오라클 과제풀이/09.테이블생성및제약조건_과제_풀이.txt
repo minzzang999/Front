@@ -1,0 +1,71 @@
+테이블 생성과 제약조건 과제 풀이
+
+1. 고객 테이블 : customer -> 회원아이디, 이름, 이메일, 주소를 갖는 테이블을 생성하고
+고객 정보 5개 이상을 추가하시오.
+단, 아웃라인 방식으로 한 행을 유일하게 구분할 후보키를 선정하여 PRIMARY KEY를 지정하시오.
+
+CREATE TABLE customer(
+  id VARCHAR2(15),
+  name VARCHAR2(5 CHAR) NOT NULL,
+  email VARCHAR2(20) NOT NULL,
+  address varchar2(80 char) NOT NULL,
+  CONSTRAINT customer01_pk PRIMARY KEY(id)
+);
+
+INSERT INTO customer VALUES('asd123', '이순신', 'host01@naver.com', '서울시 구로구 구로동');
+INSERT INTO customer VALUES('asd1234', '강감찬', 'host02@naver.com', '서울시 영등포구 영등포동');
+INSERT INTO customer VALUES('asd1235', '유관순', 'host03@naver.com', '서울시 영등포구 여의도동');
+INSERT INTO customer VALUES('asd1236', '권율', 'host04@naver.com', '서울시 강남구 강남동');
+INSERT INTO customer VALUES('asd1237', '대장금', 'host05@naver.com', '서울시 마포구 마포동');
+
+SELECT * FROM customer;
+
+
+
+2. 상품테이블 : product -> 상품코드, 상품명, 가격, 제조사를 갖는 테이블을 생성하고
+상품정보 10개 이상을 추가하시오.
+단, 인라인 방식으로 한 행을 유일하게 구분할 후보키를 선정하여 PRIMARY KEY를 지정하시오.
+
+CREATE TABLE product(
+  code NUMBER PRIMARY KEY,
+  name VARCHAR2(10 CHAR) NOT NULL,
+  price NUMBER NOT NULL,
+  maker VARCHAR2 (10 CHAR) NOT NULL
+
+INSERT INTO product VALUES(100, '새우깡', 1500, '농심');
+INSERT INTO product VALUES(101, '감자깡', 1500, '농심');
+INSERT INTO product VALUES(102, '고구마깡', 1800, '농심');
+INSERT INTO product VALUES(103, '알새우칩', 1000, '오뚜기');
+INSERT INTO product VALUES(104, '치토스', 2000, '오리온');
+INSERT INTO product VALUES(105, '포카칩', 3000, '오리온');
+INSERT INTO product VALUES(106, '프링글스', 2900, '프링글스');
+INSERT INTO product VALUES(107, '몽쉘', 4800, '농심');
+INSERT INTO product VALUES(108, '오예스', 5200, '오리온');
+INSERT INTO product VALUES(109, '빈츠', 4500, '해태');
+
+SELECT * FROM product;
+
+
+
+3. 주문테이블 : order_table -> 주문번호, 회원아이디, 상품코드, 주문일자를 갖는 테이블을
+생성하고 주문정보 5개 이상 추가하시오.
+단, 아웃라인 방식으로 한 행을 유일하게 구분할 후보키를 선정하여 PRIMARY KEY를 지정하시오.
+이 테이블은 주문한 회원의 아이디와 회원에게 주문된 상품 코드를 참조하고 있으므로
+customer 테이블과 product 테이블을 참조하는 참조 무결성(외래키) 제약조건을 적용하여야 합니다..
+
+CREATE TABLE order_table(
+  no NUMBER,
+  id VARCHAR2(15) NOT NULL,
+  code NUMBER NOT NULL,
+  day DATE NOT NULL,
+  CONSTRAINT order01_pk PRIMARY KEY(no),
+  CONSTRAINT order01_fk FOREIGN KEY(id) REFERENCES customer(id),
+  CONSTRAINT order020_fk FOREIGN KEY(code) REFERENCES product(code)
+);
+
+INSERT INTO order_table VALUES(1,'asd123',105,'2016-03-21');
+INSERT INTO order_table VALUES(2,'asd1234',107,'2016-02-07');
+INSERT INTO order_table VALUES(3,'asd1235',102,'2016-01-30');
+INSERT INTO order_table VALUES(4,'asd1236',109,'2016-02-28');
+INSERT INTO order_table VALUES(5,'asd1237',108,'2016-03-15');
+select * from order_table;
